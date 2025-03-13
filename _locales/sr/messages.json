@@ -1,0 +1,383 @@
+{
+   "cLog_title": {
+      "message": "Измене"
+   },
+   "cred_line1": {
+      "message": "Иконице за опције и деинсталацију са \u003Ca href=\"http://www.jigsoaricons.com/\">Jigsoar icons\u003C/a>."
+   },
+   "cred_line2": {
+      "message": "Додатна захвалност за \u003Ca href=\"https://developer.android.com/design/index.html\">Android Design\u003C/a> за три иконице у горњем десном углу странице."
+   },
+   "cred_title": {
+      "message": "Захвалности"
+   },
+   "det_notInst": {
+      "message": "Није инсталирано."
+   },
+   "ext_font": {
+      "message": "'Segoe UI', Tahoma, sans-serif"
+   },
+   "feed_text1": {
+      "message": "Слободно нам оставите поруку у вези са грешкама, питањима и сугестијама."
+   },
+   "feed_text2": {
+      "message": "Пошаљите повратне информације овде!"
+   },
+   "feed_title": {
+      "message": "Повратне информације"
+   },
+   "html_topbtn_tooltip1": {
+      "message": "Подешавања"
+   },
+   "html_topbtn_tooltip2": {
+      "message": "Захвалности и измене"
+   },
+   "html_topbtn_tooltip3": {
+      "message": "Информације"
+   },
+   "manage_menu": {
+      "message": "Управљај"
+   },
+   "manifest_description": {
+      "message": "Једноставан мени за омогућавање, онемогућавање и приступ опцијама проширења."
+   },
+   "manifest_toolbarbtn_tooltip": {
+      "message": "Управљај проширењима"
+   },
+   "opera_description": {
+      "message": "Једноставан управљач проширењима.\nКарактеристике укључују:\n- основне функције - омогућавање/онемогућавање, приступ опцијама и деинсталирање проширења\n- прилагођавање самог проширења\n- могућност креирања група проширења \n- омогућавање/онемогућавање група проширења\n- омогућена страница догађаја\nАжурирана листа измена се налази на страницама опција проширења."
+   },
+   "opt_bigp_bkbtn": {
+      "message": "Сачувај резервну копију"
+   },
+   "opt_bigp_dropz": {
+      "message": "Превуците датотеку овде\u003Cbr/>или\u003Cbr/>кликните за претрагу"
+   },
+   "opt_bigp_iconf": {
+      "message": "Наставити са увозом група проширења? Будите сигурни да имате иста проширења већ инсталирана."
+   },
+   "opt_bigp_idone": {
+      "message": "Увоз комплетиран."
+   },
+   "opt_bigp_ierrr": {
+      "message": "Погрешна увозна датотека."
+   },
+   "opt_bigp_iload": {
+      "message": "преузето"
+   },
+   "opt_bigp_merge": {
+      "message": "додај постојећим групама"
+   },
+   "opt_bigp_overw": {
+      "message": "замени постојеће групе"
+   },
+   "opt_bigp_title1": {
+      "message": "Сачувај резервну копију групе"
+   },
+   "opt_bigp_title2": {
+      "message": "Увези групе"
+   },
+   "opt_blogbtn_tooltip": {
+      "message": "Посетите почетну страницу"
+   },
+   "opt_egrp_delGrpBtn": {
+      "message": "Избриши групу"
+   },
+   "opt_egrp_editGrpBtn": {
+      "message": "Уреди групу"
+   },
+   "opt_egrp_floatTitle1": {
+      "message": "Креирај групу проширења"
+   },
+   "opt_egrp_floatTitle2": {
+      "message": "Уреди групу проширења"
+   },
+   "opt_egrp_opt1": {
+      "message": "Групишите проширења да бисте их омогућили/онемогућили као групу."
+   },
+   "opt_egrp_opt10": {
+      "message": "Дозволи само једну омогућену групу (изузетак код преклапања)"
+   },
+   "opt_egrp_opt2": {
+      "message": "Креирај нову групу"
+   },
+   "opt_egrp_opt3": {
+      "message": "Не приказуј мени на десном клику"
+   },
+   "opt_egrp_opt4": {
+      "message": "Изабери проширења"
+   },
+   "opt_egrp_opt5": {
+      "message": "Сачувај групу"
+   },
+   "opt_egrp_opt6": {
+      "message": "Сачувај као нову групу"
+   },
+   "opt_egrp_opt7": {
+      "message": "Груписано у"
+   },
+   "opt_egrp_opt8": {
+      "message": "Сачувај резервну копију/Увези"
+   },
+   "opt_egrp_opt9": {
+      "message": "Види детаље групе"
+   },
+   "opt_egrp_saveChgNam": {
+      "message": "Већ постоји група са истим именом."
+   },
+   "opt_egrp_saveOver": {
+      "message": "Већ постоји група са истим именом. Уписати преко групе?"
+   },
+   "opt_egrp_title": {
+      "message": "Групе проширења"
+   },
+   "opt_func_opt1": {
+      "message": "Клик на име покреће апликацију"
+   },
+   "opt_func_opt2": {
+      "message": "Запамти стање траке за претрагу"
+   },
+   "opt_func_opt3": {
+      "message": "Пређи на напреднији приказ група"
+   },
+   "opt_func_opt4": {
+      "message": "Прикажи функционални мени на десном клику"
+   },
+   "opt_func_title": {
+      "message": "Функције"
+   },
+   "opt_grpname_invalid": {
+      "message": "Пронађен неважећи знак, молимо вас промените име."
+   },
+   "opt_looks_opt1": {
+      "message": "Сортирај листу проширења по:"
+   },
+   "opt_looks_opt10": {
+      "message": "Прикажи картице"
+   },
+   "opt_looks_opt11": {
+      "message": "Прикажи резервну иконицу дугмета на алатној траци"
+   },
+   "opt_looks_opt12": {
+      "message": "Прикажи бројач категорије"
+   },
+   "opt_looks_opt13": {
+      "message": "Прикажи поље за претрагу"
+   },
+   "opt_looks_opt14": {
+      "message": "Прикажи дугме 'Онемогући све'"
+   },
+   "opt_looks_opt15": {
+      "message": "Прикажи 'Набави још проширења'"
+   },
+   "opt_looks_opt16": {
+      "message": "Прикажи дозволе у опису алатке"
+   },
+   "opt_looks_opt17": {
+      "message": "Прикажи 'Ново и ажурирано'"
+   },
+   "opt_looks_opt17a": {
+      "message": "Прикажи 'Недавно онемогућено'"
+   },
+   "opt_looks_opt18": {
+      "message": "Трака за претрагу и дугмад на врху"
+   },
+   "opt_looks_opt19": {
+      "message": "Картице на врху"
+   },
+   "opt_looks_opt2": {
+      "message": "омогућено/онемогућено"
+   },
+   "opt_looks_opt20": {
+      "message": "Тема:"
+   },
+   "opt_looks_opt21": {
+      "message": "Подразумевани систем"
+   },
+   "opt_looks_opt22": {
+      "message": "светло"
+   },
+   "opt_looks_opt23": {
+      "message": "тамно"
+   },
+   "opt_looks_opt3": {
+      "message": "алфабету"
+   },
+   "opt_looks_opt4": {
+      "message": "Групиши листу проширења по категоријима"
+   },
+   "opt_looks_opt5": {
+      "message": "Прикажи поље за потврду"
+   },
+   "opt_looks_opt6": {
+      "message": "Прикажи иконицу за опције"
+   },
+   "opt_looks_opt7": {
+      "message": "Прикажи иконицу за деинсталацију"
+   },
+   "opt_looks_opt8": {
+      "message": "Прикажи апликације"
+   },
+   "opt_looks_opt9": {
+      "message": "Прикажи теме"
+   },
+   "opt_looks_optY": {
+      "message": "Прикажи груписани индикатор"
+   },
+   "opt_looks_title": {
+      "message": "Изглед"
+   },
+   "opt_resetbtn": {
+      "message": "Поништи подешавања"
+   },
+   "opt_resetbtn_popupMsg": {
+      "message": "Поништити подешавања?\nГрупе проширења ће такође бити уклоњене."
+   },
+   "other_text1": {
+      "message": "Свратите на моју DeviantArt страницу да видите још мојих радова!"
+   },
+   "other_title": {
+      "message": "Остали радови"
+   },
+   "perm_reason1a": {
+      "message": "Управљање апликацијама, проширењима и темама"
+   },
+   "perm_reason1b": {
+      "message": "ЗАШТО: Без ове дозволе проширење не може изводити своје основне функције"
+   },
+   "perm_text1": {
+      "message": "Као што је наведено SERP Extension Manager може приступити:"
+   },
+   "perm_text2": {
+      "message": "Можете сазнати више о дозволама и упозорењима \u003Ca href=\"http://developer.chrome.com/extensions/permission_warnings.html#warnings\">овде\u003C/a>"
+   },
+   "perm_title": {
+      "message": "Разлог за захтевање дозвола"
+   },
+   "popup_btn_disable_text": {
+      "message": "Онемогући све"
+   },
+   "popup_btn_disable_tooltip": {
+      "message": "Онемогући сва проширења"
+   },
+   "popup_btn_enable_text": {
+      "message": "Омогући"
+   },
+   "popup_btn_enable_tooltip": {
+      "message": "Омогући проширења"
+   },
+   "popup_checkbx_tooltip": {
+      "message": "Омогући/Онемогући"
+   },
+   "popup_disSelf_prompt_msg": {
+      "message": "Да ли сте сигурни да желите да онемогућите SERP Extension Manager?"
+   },
+   "popup_disSelf_prompt_no": {
+      "message": "Не"
+   },
+   "popup_disSelf_prompt_yes": {
+      "message": "Да"
+   },
+   "popup_extSet": {
+      "message": "Отвори подешавања проширења у прегледачу"
+   },
+   "popup_header1": {
+      "message": "Проширења"
+   },
+   "popup_header2": {
+      "message": "Апликације"
+   },
+   "popup_header3": {
+      "message": "Теме"
+   },
+   "popup_headerL": {
+      "message": "Ново и ажурирано"
+   },
+   "popup_headerLD": {
+      "message": "Недавно онемогућено"
+   },
+   "popup_icon_tooltip": {
+      "message": "Посети почетну страницу"
+   },
+   "popup_manGrp": {
+      "message": "Управљај групама"
+   },
+   "popup_noGrpMsg": {
+      "message": "Нема креираних група проширења. \u003Cbr/> Креирајте нову групу на страници за опције."
+   },
+   "popup_noItmMsg": {
+      "message": "Нема ставки у овој категорији."
+   },
+   "popup_options_tooltip": {
+      "message": "Опције"
+   },
+   "popup_pNon": {
+      "message": "ниједан"
+   },
+   "popup_perm": {
+      "message": "Дозволе"
+   },
+   "popup_rClick_add": {
+      "message": "Додај у групу..."
+   },
+   "popup_rClick_mov": {
+      "message": "Помери у групу..."
+   },
+   "popup_rClick_new": {
+      "message": "Стави омогућена проширења у нову групу."
+   },
+   "popup_rClick_ng": {
+      "message": "Нову групу..."
+   },
+   "popup_rClick_rem": {
+      "message": "Уклони из групе"
+   },
+   "popup_search_no_result": {
+      "message": "Нема пронађених ставки за '"
+   },
+   "popup_search_tooltip": {
+      "message": "Унесите кључну реч за претрагу"
+   },
+   "popup_store": {
+      "message": "Набави још проширења!"
+   },
+   "popup_tab2": {
+      "message": "Групе"
+   },
+   "popup_uninstall_prompt_cancel": {
+      "message": "Откажи"
+   },
+   "popup_uninstall_prompt_title": {
+      "message": "Потврди деинсталацију"
+   },
+   "popup_uninstall_tooltip": {
+      "message": "Деинсталирај"
+   },
+   "tips_tip1": {
+      "message": "Поље за потврду и врста проширења (Chrome)"
+   },
+   "tips_tip1_line1": {
+      "message": "ШТА: Поље за потврду изгледа и функционоше другачије за различите врсте проширења"
+   },
+   "tips_tip1_line2": {
+      "message": "ДЕТАЉИ: Апликације = поље за потврду има црвени оквир; Теме = поље за потврду је онемогућено"
+   },
+   "tips_tip2": {
+      "message": "Навигација помоћу тастатуре у прозору проширења"
+   },
+   "tips_tip2_line1": {
+      "message": "КАКО: Активирајте прозор проширења затим користите тастере са стрелицама за навигацију"
+   },
+   "tips_tip2_line2": {
+      "message": "КОНТРОЛЕ: ↑, ↓ = Кретање кроз листу проширења, Размак (Space ) = омогућено/онемогућено; o = Отвара страницу подешавања проширења"
+   },
+   "tips_tip3": {
+      "message": "Доделите тастерске пречице за проширење"
+   },
+   "tips_tip3_line1": {
+      "message": "КАКО: Отворите управљач проширењима, спустите се до краја странице и притисните \"Тастерске пречице за екстензије\""
+   },
+   "tips_title": {
+      "message": "Савети о коришћењу"
+   }
+}

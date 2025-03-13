@@ -1,0 +1,28 @@
+{
+   "background": {
+      "persistent": false,
+      "scripts": [ "common-lite.js", "common.js", "bg.js" ]
+   },
+   "browser_action": {
+      "default_icon": {
+         "19": "icon-19-0.png",
+         "38": "icon-38-0.png"
+      },
+      "default_popup": "popup.html",
+      "default_title": "__MSG_manifest_toolbarbtn_tooltip__"
+   },
+   "default_locale": "en",
+   "description": "__MSG_manifest_description__",
+   "icons": {
+      "128": "icon-128.png",
+      "16": "icon-16.png",
+      "48": "icon-48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDPQgecbnVtVHJLrXuqd2mtuqVKziRYN2swso4WDgRAUaU/8ezLyJOK1zfnYyybCkddhZugg97/7+roiddGS3eSmFkLVyi39RnFtmfB1wI6Ji1CjO9eXe7KGhkGkzN/Zc0+KPN6mMqXtaJENVHrKAFMXf9Y7GsLUepDzlM7TWzrrQIDAQAB",
+   "manifest_version": 1,
+   "name": "SERP Extension Manager",
+   "options_page": "options.html",
+   "permissions": [ "management", "contextMenus" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.4.11"
+}

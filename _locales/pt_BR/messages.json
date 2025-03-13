@@ -1,0 +1,383 @@
+{
+   "cLog_title": {
+      "message": "Changelog"
+   },
+   "cred_line1": {
+      "message": "Opções e ícones de desinstalação no pop-up de \u003Ca href=\"http://www.jigsoaricons.com/\">ícones Jigsoar\u003C/a>."
+   },
+   "cred_line2": {
+      "message": "Créditos adicionais para \u003Ca href=\"https://developer.android.com/design/index.html\">Android Design\u003C/a> para os 3 ícones localizados superior direito."
+   },
+   "cred_title": {
+      "message": "Créditos"
+   },
+   "det_notInst": {
+      "message": "Não instalado"
+   },
+   "ext_font": {
+      "message": "'Segoe UI', Tahoma, sans-serif"
+   },
+   "feed_text1": {
+      "message": "Sinta-se livre para deixar uma mensagem em que diz respeito aos erros, dúvidas ou sugestões."
+   },
+   "feed_text2": {
+      "message": "Comentários aqui!"
+   },
+   "feed_title": {
+      "message": "Comentários"
+   },
+   "html_topbtn_tooltip1": {
+      "message": "Configurações"
+   },
+   "html_topbtn_tooltip2": {
+      "message": "Créditos e Changelog"
+   },
+   "html_topbtn_tooltip3": {
+      "message": "Informação"
+   },
+   "manage_menu": {
+      "message": "administrar"
+   },
+   "manifest_description": {
+      "message": "Um menu simples para ativar, desativar e opções de acesso de extensões."
+   },
+   "manifest_toolbarbtn_tooltip": {
+      "message": "Gerenciar extensões"
+   },
+   "opera_description": {
+      "message": "Apenas um gerenciador de extensão simples.\nAs características incluem:\n- função básica para ativar/desativar, as opções de acesso e as extensões de desinstalação via pop-up\n- personalize o pop-up\n- capacidade de criar grupos de extensões\n- ativar/desativar grupos de extensão por meio de pop-up em um menu do botão direito\n- página do evento habilitado\nChangelog Atualizado está nas páginas de opções de extensão."
+   },
+   "opt_bigp_bkbtn": {
+      "message": "Salve Backup-Cópia de Segurança do arquivo"
+   },
+   "opt_bigp_dropz": {
+      "message": "Largar arquivo aqui\u003Cbr/>ou\u003Cbr/>clique para navegar"
+   },
+   "opt_bigp_iconf": {
+      "message": "Prossiga com importação de grupos de extensões? Para garantir que você tenha as mesmas extensões instaladas."
+   },
+   "opt_bigp_idone": {
+      "message": "Importação completa."
+   },
+   "opt_bigp_ierrr": {
+      "message": "Arquivo de importação inválido."
+   },
+   "opt_bigp_iload": {
+      "message": "carregado"
+   },
+   "opt_bigp_merge": {
+      "message": "adicionar aos grupos existentes"
+   },
+   "opt_bigp_overw": {
+      "message": "substituir os grupos existentes"
+   },
+   "opt_bigp_title1": {
+      "message": "Backup-Cópia de Segurança Grupos"
+   },
+   "opt_bigp_title2": {
+      "message": "Importar Grupos"
+   },
+   "opt_blogbtn_tooltip": {
+      "message": "Visite blogsite"
+   },
+   "opt_egrp_delGrpBtn": {
+      "message": "Apagar grupo"
+   },
+   "opt_egrp_editGrpBtn": {
+      "message": "Editar grupo"
+   },
+   "opt_egrp_floatTitle1": {
+      "message": "Criar Grupo de Extensão"
+   },
+   "opt_egrp_floatTitle2": {
+      "message": "Editar Grupo de Extensão"
+   },
+   "opt_egrp_opt1": {
+      "message": "Agrupar extensões para ativar/desativar como um grupo."
+   },
+   "opt_egrp_opt10": {
+      "message": "Só permitem um grupo habilitado (exceção sobreposição)"
+   },
+   "opt_egrp_opt2": {
+      "message": "Criar novo grupo"
+   },
+   "opt_egrp_opt3": {
+      "message": "Não mostrar menu do botão direito"
+   },
+   "opt_egrp_opt4": {
+      "message": "Selecione extensões para incluir:"
+   },
+   "opt_egrp_opt5": {
+      "message": "Salvar grupo"
+   },
+   "opt_egrp_opt6": {
+      "message": "Salvar como novo grupo"
+   },
+   "opt_egrp_opt7": {
+      "message": "Agrupados em:"
+   },
+   "opt_egrp_opt8": {
+      "message": "Backup-Cópia de Segurança/Importação"
+   },
+   "opt_egrp_opt9": {
+      "message": "Exibir detalhes do grupo"
+   },
+   "opt_egrp_saveChgNam": {
+      "message": "Já existe um grupo com o mesmo nome."
+   },
+   "opt_egrp_saveOver": {
+      "message": "Já existe um grupo com o mesmo nome. Substituir grupo?"
+   },
+   "opt_egrp_title": {
+      "message": "Grupos de Extensão"
+   },
+   "opt_func_opt1": {
+      "message": "Clique no nome para lançar aplicativo"
+   },
+   "opt_func_opt2": {
+      "message": "Lembre-se da pesquisa"
+   },
+   "opt_func_opt3": {
+      "message": "Mudar para grupo Avançado"
+   },
+   "opt_func_opt4": {
+      "message": "Mostrar menus do botão direito funcionais em pop-up"
+   },
+   "opt_func_title": {
+      "message": "Função"
+   },
+   "opt_grpname_invalid": {
+      "message": "Encontrou um caracter inválido, altere o nome."
+   },
+   "opt_looks_opt1": {
+      "message": "Classificar lista de extensão por:"
+   },
+   "opt_looks_opt10": {
+      "message": "Mostrar guias inferiores"
+   },
+   "opt_looks_opt11": {
+      "message": "Use o ícone alternativo na barra de ferramentas"
+   },
+   "opt_looks_opt12": {
+      "message": "Mostrar contagem de categoria"
+   },
+   "opt_looks_opt13": {
+      "message": "Mostrar caixa de pesquisa"
+   },
+   "opt_looks_opt14": {
+      "message": "Mostrar botão \"desativar todos\""
+   },
+   "opt_looks_opt15": {
+      "message": "Mostrar 'Obter mais extensões!' link"
+   },
+   "opt_looks_opt16": {
+      "message": "Mostrar permissões em dicas de ferramentas"
+   },
+   "opt_looks_opt17": {
+      "message": "Mostrar 'Novos e Atualizados'"
+   },
+   "opt_looks_opt17a": {
+      "message": "Mostrar 'Recentemente Desativados'"
+   },
+   "opt_looks_opt18": {
+      "message": "Pesquisa bar & amp; botões na parte superior"
+   },
+   "opt_looks_opt19": {
+      "message": "Guias inferiores no topo"
+   },
+   "opt_looks_opt2": {
+      "message": "Ativar/Desativar"
+   },
+   "opt_looks_opt20": {
+      "message": "Tema:"
+   },
+   "opt_looks_opt21": {
+      "message": "sistema padrão"
+   },
+   "opt_looks_opt22": {
+      "message": "luz"
+   },
+   "opt_looks_opt23": {
+      "message": "escuro"
+   },
+   "opt_looks_opt3": {
+      "message": "ordem alfabética"
+   },
+   "opt_looks_opt4": {
+      "message": "Grupo lista de extensão por categoria"
+   },
+   "opt_looks_opt5": {
+      "message": "Mostrar caixa de seleção"
+   },
+   "opt_looks_opt6": {
+      "message": "Mostrar opções de ícone"
+   },
+   "opt_looks_opt7": {
+      "message": "Mostrar ícone de desinstalação"
+   },
+   "opt_looks_opt8": {
+      "message": "Mostrar aplicativos"
+   },
+   "opt_looks_opt9": {
+      "message": "Mostrar temas"
+   },
+   "opt_looks_optY": {
+      "message": "Mostrar indicador agrupado"
+   },
+   "opt_looks_title": {
+      "message": "Aparências"
+   },
+   "opt_resetbtn": {
+      "message": "Redefinir configurações"
+   },
+   "opt_resetbtn_popupMsg": {
+      "message": "Redefinir configurações?\nGrupos de Extensão serão removidos também!"
+   },
+   "other_text1": {
+      "message": "Fazer cair pela minha página DeviantArt para ver mais de meus trabalhos!"
+   },
+   "other_title": {
+      "message": "Outros Trabalhos"
+   },
+   "perm_reason1a": {
+      "message": "Gerenciar seus aplicativos, extensões e temas"
+   },
+   "perm_reason1b": {
+      "message": "PORQUE: Sem essa permissão a extensão não pode executar as suas funções básicas"
+   },
+   "perm_text1": {
+      "message": "Como afirmado SERP Extension Manager pode acessar:"
+   },
+   "perm_text2": {
+      "message": "Você pode descobrir mais sobre a permissão dos acionadores de aviso \u003Ca href=\"http://developer.chrome.com/extensions/permission_warnings.html#warnings\">aqui\u003C/a>"
+   },
+   "perm_title": {
+      "message": "Motivo Para as solicitações de permissão"
+   },
+   "popup_btn_disable_text": {
+      "message": "Desativar Todos"
+   },
+   "popup_btn_disable_tooltip": {
+      "message": "Desativar Todas as Extensões apenas"
+   },
+   "popup_btn_enable_text": {
+      "message": "Ativar"
+   },
+   "popup_btn_enable_tooltip": {
+      "message": "Ativar Extensões"
+   },
+   "popup_checkbx_tooltip": {
+      "message": "Ativar/Desativar"
+   },
+   "popup_disSelf_prompt_msg": {
+      "message": "Tem certeza de que deseja desativar SERP Extension Manager?"
+   },
+   "popup_disSelf_prompt_no": {
+      "message": "Não"
+   },
+   "popup_disSelf_prompt_yes": {
+      "message": "Sim"
+   },
+   "popup_extSet": {
+      "message": "Configurações de extensão aberta do navegador"
+   },
+   "popup_header1": {
+      "message": "Extensões"
+   },
+   "popup_header2": {
+      "message": "Aplicativos"
+   },
+   "popup_header3": {
+      "message": "Temas"
+   },
+   "popup_headerL": {
+      "message": "Novos e Atualizado"
+   },
+   "popup_headerLD": {
+      "message": "Recentemente Desativado"
+   },
+   "popup_icon_tooltip": {
+      "message": "Visitar Homepage"
+   },
+   "popup_manGrp": {
+      "message": "Gerenciar grupos"
+   },
+   "popup_noGrpMsg": {
+      "message": "Não há grupos de extensão. \u003Cbr/> Tente criar um na página de opções."
+   },
+   "popup_noItmMsg": {
+      "message": "Não há itens nesta categoria"
+   },
+   "popup_options_tooltip": {
+      "message": "Opções"
+   },
+   "popup_pNon": {
+      "message": "nenhum"
+   },
+   "popup_perm": {
+      "message": "Permissões"
+   },
+   "popup_rClick_add": {
+      "message": "Adicionar ao grupo..."
+   },
+   "popup_rClick_mov": {
+      "message": "Mover para grupo..."
+   },
+   "popup_rClick_new": {
+      "message": "Coloque extensões ativadas em um novo grupo"
+   },
+   "popup_rClick_ng": {
+      "message": "Novo grupo..."
+   },
+   "popup_rClick_rem": {
+      "message": "Remover do grupo"
+   },
+   "popup_search_no_result": {
+      "message": "Nenhum item encontrado para '"
+   },
+   "popup_search_tooltip": {
+      "message": "Digite busca de palavras chave"
+   },
+   "popup_store": {
+      "message": "Obter mais extensões!"
+   },
+   "popup_tab2": {
+      "message": "Grupos"
+   },
+   "popup_uninstall_prompt_cancel": {
+      "message": "Cancelar"
+   },
+   "popup_uninstall_prompt_title": {
+      "message": "Confirme Desinstalação"
+   },
+   "popup_uninstall_tooltip": {
+      "message": "Desinstalar"
+   },
+   "tips_tip1": {
+      "message": "Caixa de seleção e tipo de extensão (Chrome)"
+   },
+   "tips_tip1_line1": {
+      "message": "O QUE: A caixa de seleção parece e funciona de forma diferente para diferentes tipos de extensão"
+   },
+   "tips_tip1_line2": {
+      "message": "Detalhe: Apps = caixa de seleção tem uma borda vermelha; Temas = caixa de seleção é desativado"
+   },
+   "tips_tip2": {
+      "message": "Navegação pelo teclado na extensão pop-up"
+   },
+   "tips_tip2_line1": {
+      "message": "COMO: Acionar o pop-up, em seguida, use as setas para navegar"
+   },
+   "tips_tip2_line2": {
+      "message": "CONTROLES: ↑, ↓ = Executar através da lista de extensão; Espaço = alternar ativar / desativar; o = Faze subir página opção de extensão"
+   },
+   "tips_tip3": {
+      "message": "Atribuir um atalho de teclado para a extensão"
+   },
+   "tips_tip3_line1": {
+      "message": "COMO: Vá para a página de configurações de extensões do navegador, vá até o final e clique em \"Configurar comandos\""
+   },
+   "tips_title": {
+      "message": "Dicas de uso"
+   }
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="controls.css" rel="stylesheet" type="text/css" />
+<link href="popup.css" rel="stylesheet" type="text/css" />
+<link href="scrollbar.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="popup-dark.css" media="(prefers-color-scheme: dark)" id="dark" area="popup">
+<script src="common-lite.js"></script>
+<script src="common.js"></script>
+<script src="popup.js"></script>
+<script src="theme.js"></script>
+</head>
+<body>
+
+<div id="top">
+	<div id="menu" class="rMenu" style="display:none;z-index:10;"></div>
+	<div id="menu2" class="rMenu" style="display:none;z-index:10;"></div>
+	<div id="extList">
+		<div id="latCont" class="container" style="display:none;">
+			<h1 id="headL" class="header">Latest</h1>
+			<div id="latContInner">
+			</div>
+		</div>
+		<div id="ldCont" class="container" style="display:none;">
+			<h1 id="headLD" class="header">Recent disabled</h1>
+			<div id="ldContInner">
+			</div>
+		</div>
+		<div id="dispNoGrp">
+			<div id="allCont" class="container">
+				<h1 id="head0" class="header">Extensions, Apps & Themes</h1>
+				<span id="allNo" class="sideTxt"></span>
+				<div id="noGrpInner">
+				</div>
+			</div>
+		</div>
+
+		<div id="dispGrp">
+			<div id="extCont" class="container">
+				<h1 id="head1" class="header">Extensions</h1>
+				<span id="extNo" class="sideTxt"></span>
+				<div id="extContInner">
+				</div>
+			</div>
+			<div id="appCont" class="container">
+				<h1 id="head2" class="header">Apps</h1>
+				<span id="appNo" class="sideTxt"></span>
+				<div id="appContInner">
+				</div>
+			</div>
+			<div id="thmCont" class="container">
+				<h1 id="head3" class="header">Themes</h1>
+				<span id="thmNo" class="sideTxt"></span>
+				<div id="thmContInner">
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div id="extGroups">
+	</div>
+</div>
+
+<table id="bar" cellspacing="0" cellpadding="0" border="0"><tr>
+	<td id="searchholder"><input type="search" title="Enter search keyword" id="searchQ" class="topField" spellcheck="false"/></td>
+	<td id="disholder"><button id="disableAll" class="topBtn" title="Disable All Extensions">Disable All</button></td>
+</tr></table>
+
+<div id="bottom">
+	<div id="extTab">
+		<h2 id="grp1">Extensions</h2>
+	</div>
+	<div id="grpTab" class="tabs">
+		<h2 id="grp2">Groups</h2>
+	</div>
+</div>
+<div id="storeGrp">
+	<div id="storeCont" class="container">
+		<div id="storeContInner">
+			<a id="storeLnk" href="https://chrome.google.com/webstore/category/extensions" target="_blank">Get more extensions!</a>
+		</div>
+	</div>
+</div>
+
+<div id="ovl" class="overlay hidden">
+	
+	<div id="outerPrompt" class="inner">
+		<a id="closeOver"><img src="close.png"></a>
+		<div id="titleBox" class="optionGrpTitle left"></div>
+		
+		<div id="uninstallPrompt" class="innerOver">
+			<div id="uinContents">
+				<div id="uinIco"></div><div id="uinTxt"  style="padding-right:15px;"></div>
+			</div>
+			<div>
+				<button id="noButton" name="" class="prmBtn" style="float:right; margin-right: 12px; margin-top: 10px;">Cancel</button>
+				<button id="yesButton" name="" class="prmBtn" style="float:right; margin:10px 4px;">Uninstall</button>
+			</div>
+		</div>
+
+		<div id="disablePrompt" class="innerOver">
+			<div id="disContents">
+				<div id="disTxt"  style="padding:15px;"></div>
+			</div>
+			<button id="noButton2" name="" class="prmBtn" style="float:right; margin-right: 12px; margin-top: 10px;">No</button>
+			<button id="yesButton2" name="" class="prmBtn" style="float:right; margin:10px 4px;">Yes</button>
+		</div>
+		
+		<div id="newGrpPrompt" class="innerOver">
+			<div id="ngContents">
+				<input id="grpName" type="text" placeholder=" Name of group" style="width:80%;">
+			</div>
+			<button id="noButton3" name="" class="prmBtn" style="float:right; margin-right: 12px; margin-top: 10px;">Cancel</button>
+			<button id="savGrpButton" name="" class="prmBtn" style="float:right; margin:10px 4px;">Save group</button>
+		</div>
+	</div>
+
+</div><!---->
+
+</body>
+
+</html>

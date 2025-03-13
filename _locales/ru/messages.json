@@ -1,0 +1,383 @@
+{
+   "cLog_title": {
+      "message": "Список изменений"
+   },
+   "cred_line1": {
+      "message": "Иконки настроек и удаления от \u003Ca href=\"http://www.jigsoaricons.com/\">Jigsoar icons\u003C/a>."
+   },
+   "cred_line2": {
+      "message": "Отдельное спасибо \u003Ca href=\"https://developer.android.com/design/index.html\">Android Design\u003C/a> за 3 иконки для кнопки расширения."
+   },
+   "cred_title": {
+      "message": "Благодарности"
+   },
+   "det_notInst": {
+      "message": "Не установлен"
+   },
+   "ext_font": {
+      "message": "'Segoe UI', Tahoma, sans-serif"
+   },
+   "feed_text1": {
+      "message": "Вы можете написать сообщение об ошибках, задать вопросы или оставить предложения."
+   },
+   "feed_text2": {
+      "message": "Обратная связь здесь!"
+   },
+   "feed_title": {
+      "message": "Обратная связь"
+   },
+   "html_topbtn_tooltip1": {
+      "message": "Настройки"
+   },
+   "html_topbtn_tooltip2": {
+      "message": "Благодарности и список изменений"
+   },
+   "html_topbtn_tooltip3": {
+      "message": "Информация"
+   },
+   "manage_menu": {
+      "message": "Управление расширениями"
+   },
+   "manifest_description": {
+      "message": "Простой менеджер расширений для быстрого включения, выключения и доступа к настройкам."
+   },
+   "manifest_toolbarbtn_tooltip": {
+      "message": "Управление расширениями"
+   },
+   "opera_description": {
+      "message": "Простой менеджер расширений. \n Особенности: \n - Основная функция: включение/выключение, настройка и удаление расширений во всплывающем окне \n - Настройка всплывающего окна \n - Возможность создания групп расширений \n - Включение/выключение групп расширений из всплывающего окна и контекстного меню \n - Страница просмотра сведений о группах \n Список изменений находится на странице настроек расширения"
+   },
+   "opt_bigp_bkbtn": {
+      "message": "Сохранить резервную копию"
+   },
+   "opt_bigp_dropz": {
+      "message": "Перетяните файл сюда\u003Cbr/>или\u003Cbr/>нажмите 'Обзор'"
+   },
+   "opt_bigp_iconf": {
+      "message": "Продолжить импорт групп расширений? Убедитесь, что у вас установлены одинаковые расширения."
+   },
+   "opt_bigp_idone": {
+      "message": "Восстановление завершено."
+   },
+   "opt_bigp_ierrr": {
+      "message": "Недопустимый файл"
+   },
+   "opt_bigp_iload": {
+      "message": "загрузка"
+   },
+   "opt_bigp_merge": {
+      "message": "добавить в группы"
+   },
+   "opt_bigp_overw": {
+      "message": "заменить группы"
+   },
+   "opt_bigp_title1": {
+      "message": "Сохранить группы"
+   },
+   "opt_bigp_title2": {
+      "message": "Восстановить группы"
+   },
+   "opt_blogbtn_tooltip": {
+      "message": "Посетите блог"
+   },
+   "opt_egrp_delGrpBtn": {
+      "message": "Удалить"
+   },
+   "opt_egrp_editGrpBtn": {
+      "message": "Изменить"
+   },
+   "opt_egrp_floatTitle1": {
+      "message": "Создать группу расширений"
+   },
+   "opt_egrp_floatTitle2": {
+      "message": "Изменить группу расширений"
+   },
+   "opt_egrp_opt1": {
+      "message": "Группируйте ваши расширения, чтобы включать/отключать их группой."
+   },
+   "opt_egrp_opt10": {
+      "message": "Разрешить только одну включённую группу (исключение дублирования)"
+   },
+   "opt_egrp_opt2": {
+      "message": "Создать новую группу"
+   },
+   "opt_egrp_opt3": {
+      "message": "Не показывать в контекстном меню"
+   },
+   "opt_egrp_opt4": {
+      "message": "Выберите расширения:"
+   },
+   "opt_egrp_opt5": {
+      "message": "Сохранить группу"
+   },
+   "opt_egrp_opt6": {
+      "message": "Сохранить как новую группу"
+   },
+   "opt_egrp_opt7": {
+      "message": "В группе:"
+   },
+   "opt_egrp_opt8": {
+      "message": "Сохранить/Восстановить"
+   },
+   "opt_egrp_opt9": {
+      "message": "Просмотр сведений о группе"
+   },
+   "opt_egrp_saveChgNam": {
+      "message": "Уже есть группа с таким именем."
+   },
+   "opt_egrp_saveOver": {
+      "message": "Уже есть группа с таким именем. Перезаписать группу?"
+   },
+   "opt_egrp_title": {
+      "message": "Группы расширений"
+   },
+   "opt_func_opt1": {
+      "message": "Запускать приложение щелчком по имени"
+   },
+   "opt_func_opt2": {
+      "message": "Запоминать состояние строки поиска"
+   },
+   "opt_func_opt3": {
+      "message": "Переключиться в расширенный вид групп"
+   },
+   "opt_func_opt4": {
+      "message": "Включить функциональное контекстное меню во всплывающем окне"
+   },
+   "opt_func_title": {
+      "message": "Функции"
+   },
+   "opt_grpname_invalid": {
+      "message": "Обнаружен недопустимый символ, пожалуйста, изменить название."
+   },
+   "opt_looks_opt1": {
+      "message": "Сортировать расширения по:"
+   },
+   "opt_looks_opt10": {
+      "message": "Показывать вкладки 'Расширения' и 'Группы'"
+   },
+   "opt_looks_opt11": {
+      "message": "Использовать альтернативную иконку в панели инструментов"
+   },
+   "opt_looks_opt12": {
+      "message": "Показывать счётчик категорий"
+   },
+   "opt_looks_opt13": {
+      "message": "Показывать строку поиска"
+   },
+   "opt_looks_opt14": {
+      "message": "Показывать кнопку 'Отключить все'"
+   },
+   "opt_looks_opt15": {
+      "message": "Показывать ссылку 'Ещё расширения'"
+   },
+   "opt_looks_opt16": {
+      "message": "Показывать полномочия расширений во всплывающих подсказках"
+   },
+   "opt_looks_opt17": {
+      "message": "Показывать 'Новые и обновлённые'"
+   },
+   "opt_looks_opt17a": {
+      "message": "Показывать 'Недавно отключённые'"
+   },
+   "opt_looks_opt18": {
+      "message": "Отображать строку поиска и кнопку 'Отключить все' сверху"
+   },
+   "opt_looks_opt19": {
+      "message": "Отображать вкладки 'Расширения' и 'Группы' сверху"
+   },
+   "opt_looks_opt2": {
+      "message": "состоянию (включено/отключено)"
+   },
+   "opt_looks_opt20": {
+      "message": "Тема:"
+   },
+   "opt_looks_opt21": {
+      "message": "система по умолчанию"
+   },
+   "opt_looks_opt22": {
+      "message": "светлый"
+   },
+   "opt_looks_opt23": {
+      "message": "темно"
+   },
+   "opt_looks_opt3": {
+      "message": "алфавиту"
+   },
+   "opt_looks_opt4": {
+      "message": "Группировать расширения по категориям"
+   },
+   "opt_looks_opt5": {
+      "message": "Показывать чекбокс включения/отключения расширений"
+   },
+   "opt_looks_opt6": {
+      "message": "Показывать иконку настроек расширений"
+   },
+   "opt_looks_opt7": {
+      "message": "Показывать иконку удаления расширений"
+   },
+   "opt_looks_opt8": {
+      "message": "Показывать приложения"
+   },
+   "opt_looks_opt9": {
+      "message": "Показывать темы"
+   },
+   "opt_looks_optY": {
+      "message": "Показывать сгруппированный индикатор"
+   },
+   "opt_looks_title": {
+      "message": "Вид"
+   },
+   "opt_resetbtn": {
+      "message": "Сбросить настройки"
+   },
+   "opt_resetbtn_popupMsg": {
+      "message": "Сбросить настройки?\nГруппы расширений будут удалены!"
+   },
+   "other_text1": {
+      "message": "Посетите мою страницу на DeviantArt, чтобы ознакомиться с моими работами!"
+   },
+   "other_title": {
+      "message": "Другие разработки"
+   },
+   "perm_reason1a": {
+      "message": "Управлению приложениями, расширениями и темами"
+   },
+   "perm_reason1b": {
+      "message": "Без этого расширение просто не будет работать"
+   },
+   "perm_text1": {
+      "message": "SERP Extension Manager получает доступ к:"
+   },
+   "perm_text2": {
+      "message": "Вы можете узнать больше о предупреждениях на получение полномочий \u003Ca href=\"http://developer.chrome.com/extensions/permission_warnings.html#warnings\">здесь\u003C/a>."
+   },
+   "perm_title": {
+      "message": "Запрашиваемые полномочия"
+   },
+   "popup_btn_disable_text": {
+      "message": "Отключить все"
+   },
+   "popup_btn_disable_tooltip": {
+      "message": "Отключить только расширения (все)"
+   },
+   "popup_btn_enable_text": {
+      "message": "Включить все"
+   },
+   "popup_btn_enable_tooltip": {
+      "message": "Включить все расширения"
+   },
+   "popup_checkbx_tooltip": {
+      "message": "Включить/Отключить"
+   },
+   "popup_disSelf_prompt_msg": {
+      "message": "Вы уверены, что хотите отключить сам SERP Extension Manager?"
+   },
+   "popup_disSelf_prompt_no": {
+      "message": "Нет"
+   },
+   "popup_disSelf_prompt_yes": {
+      "message": "Да"
+   },
+   "popup_extSet": {
+      "message": "Открыть браузерное \u003Cbr/>'Управление расширениями'"
+   },
+   "popup_header1": {
+      "message": "Расширения"
+   },
+   "popup_header2": {
+      "message": "Приложения"
+   },
+   "popup_header3": {
+      "message": "Темы"
+   },
+   "popup_headerL": {
+      "message": "Новые и обновлённые"
+   },
+   "popup_headerLD": {
+      "message": "Недавно отключённые"
+   },
+   "popup_icon_tooltip": {
+      "message": "Домашняя страница"
+   },
+   "popup_manGrp": {
+      "message": "Управление группами"
+   },
+   "popup_noGrpMsg": {
+      "message": "Нет групп расширений.\u003Cbr/>Создайте их на странице настроек."
+   },
+   "popup_noItmMsg": {
+      "message": "В этой категории ничего нет"
+   },
+   "popup_options_tooltip": {
+      "message": "Настройки расширения"
+   },
+   "popup_pNon": {
+      "message": "нет"
+   },
+   "popup_perm": {
+      "message": "Полномочия:"
+   },
+   "popup_rClick_add": {
+      "message": "Добавить в группу..."
+   },
+   "popup_rClick_mov": {
+      "message": "Переместить в группу..."
+   },
+   "popup_rClick_new": {
+      "message": "Отправить включённые \u003Cbr/>расширения в новую группу"
+   },
+   "popup_rClick_ng": {
+      "message": "Новую группу..."
+   },
+   "popup_rClick_rem": {
+      "message": "Удалить из группы"
+   },
+   "popup_search_no_result": {
+      "message": "Не найдено результатов для '"
+   },
+   "popup_search_tooltip": {
+      "message": "Поиск..."
+   },
+   "popup_store": {
+      "message": "Ещё расширения"
+   },
+   "popup_tab2": {
+      "message": "Группы"
+   },
+   "popup_uninstall_prompt_cancel": {
+      "message": "Отмена"
+   },
+   "popup_uninstall_prompt_title": {
+      "message": "Подтверждение удаления"
+   },
+   "popup_uninstall_tooltip": {
+      "message": "Удалить расширение"
+   },
+   "tips_tip1": {
+      "message": "Чекбоксы и типы расширений (Chrome)"
+   },
+   "tips_tip1_line1": {
+      "message": "Чекбокс выглядит и функционирует по-разному для разных типов расширений:"
+   },
+   "tips_tip1_line2": {
+      "message": "Для приложений - чекбокс имеет красную рамку; для тем - чекбокс неактивен."
+   },
+   "tips_tip2": {
+      "message": "Навигация с помощью клавиатуры во всплывающем окне расширения:"
+   },
+   "tips_tip2_line1": {
+      "message": "Вызовите всплывающее окно, а затем используйте клавиши со стрелками для навигации."
+   },
+   "tips_tip2_line2": {
+      "message": "Управление: ↑, ↓ - перемещение по списку; Пробел - включить/отключить расширение."
+   },
+   "tips_tip3": {
+      "message": "Как назначить сочетание клавиш для расширения:"
+   },
+   "tips_tip3_line1": {
+      "message": "Перейдите к странице 'Управление расширениями' браузера и нажмите 'Горячие клавиши'."
+   },
+   "tips_title": {
+      "message": "Полезные советы"
+   }
+}

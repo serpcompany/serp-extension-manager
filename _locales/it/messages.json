@@ -1,0 +1,308 @@
+{
+   "det_notInst": {
+      "message": "Non installato"
+   },
+   "ext_font": {
+      "message": "'Segoe UI', Tahoma, sans-serif"
+   },
+   "html_topbtn_tooltip1": {
+      "message": "Impostazioni"
+   },
+   "html_topbtn_tooltip2": {
+      "message": "Credits and Changelog"
+   },
+   "html_topbtn_tooltip3": {
+      "message": "Informazioni"
+   },
+   "manage_menu": {
+      "message": "Gestire"
+   },
+   "manifest_description": {
+      "message": "Un semplice menù per attivare, disattivare e opzioni di accesso delle estensioni."
+   },
+   "manifest_toolbarbtn_tooltip": {
+      "message": "Gestisci estensioni"
+   },
+   "opt_bigp_bkbtn": {
+      "message": "Salva file di backup"
+   },
+   "opt_bigp_dropz": {
+      "message": "Lima di goccia qui \u003Cbr/> o \u003Cbr/> clic per navigare"
+   },
+   "opt_bigp_iconf": {
+      "message": "Procedere con gruppi di interni di importazione? Per assicurarsi di avere le stesse estensioni installate."
+   },
+   "opt_bigp_idone": {
+      "message": "Importazione completa."
+   },
+   "opt_bigp_ierrr": {
+      "message": "File d'importazione non valido."
+   },
+   "opt_bigp_iload": {
+      "message": "caricato"
+   },
+   "opt_bigp_merge": {
+      "message": "aggiunti a gruppi esistenti"
+   },
+   "opt_bigp_overw": {
+      "message": "sostituisci gruppi esistenti"
+   },
+   "opt_bigp_title1": {
+      "message": "Backup Gruppi"
+   },
+   "opt_bigp_title2": {
+      "message": "Importa gruppi"
+   },
+   "opt_egrp_delGrpBtn": {
+      "message": "Elimina gruppo"
+   },
+   "opt_egrp_editGrpBtn": {
+      "message": "Modifica gruppo"
+   },
+   "opt_egrp_floatTitle1": {
+      "message": "Crea gruppo Estensione"
+   },
+   "opt_egrp_floatTitle2": {
+      "message": "Modifica gruppo Estensione"
+   },
+   "opt_egrp_opt1": {
+      "message": "Gruppo estensioni insieme per abilitare / disabilitare loro come un gruppo."
+   },
+   "opt_egrp_opt10": {
+      "message": "Solo consentire un gruppo abilitato (eccezione sovrapposizione)"
+   },
+   "opt_egrp_opt2": {
+      "message": "Crea nuovo gruppo"
+   },
+   "opt_egrp_opt3": {
+      "message": "Non mostrare nel menu del tasto destro"
+   },
+   "opt_egrp_opt4": {
+      "message": "Selezionare estensioni per includere:"
+   },
+   "opt_egrp_opt5": {
+      "message": "Salva gruppo"
+   },
+   "opt_egrp_opt6": {
+      "message": "Salva come nuovo gruppo"
+   },
+   "opt_egrp_opt7": {
+      "message": "Raggruppati in:"
+   },
+   "opt_egrp_opt8": {
+      "message": "Backup/Importa"
+   },
+   "opt_egrp_opt9": {
+      "message": "Visualizza dettagli gruppo"
+   },
+   "opt_egrp_saveChgNam": {
+      "message": "C'è già un gruppo con lo stesso nome."
+   },
+   "opt_egrp_saveOver": {
+      "message": "C'è già un gruppo con lo stesso nome. Gruppo Sovrascrivi?"
+   },
+   "opt_egrp_title": {
+      "message": "Gruppi Estensione"
+   },
+   "opt_func_opt1": {
+      "message": "Click su nome per lanciare app"
+   },
+   "opt_func_opt2": {
+      "message": "Ricordate la ricerca"
+   },
+   "opt_func_opt3": {
+      "message": "Passa alla visualizzazione avanzata dei gruppi"
+   },
+   "opt_func_opt4": {
+      "message": "Mostra un popup con le funzioni cliccando con il tasto destro del mouse"
+   },
+   "opt_func_title": {
+      "message": "Funzione"
+   },
+   "opt_grpname_invalid": {
+      "message": "Trovato carattere non valido, si prega di cambiare il nome."
+   },
+   "opt_looks_opt1": {
+      "message": "Ordina lista delle estensioni per:"
+   },
+   "opt_looks_opt10": {
+      "message": "Mostra le schede in basso"
+   },
+   "opt_looks_opt11": {
+      "message": "Utilizzare l'icona alternativa nella barra degli strumenti"
+   },
+   "opt_looks_opt12": {
+      "message": "Mostra conteggio categorie"
+   },
+   "opt_looks_opt13": {
+      "message": "Mostra casella di ricerca"
+   },
+   "opt_looks_opt14": {
+      "message": "Mostra pulsante 'Disabilita tutto'"
+   },
+   "opt_looks_opt15": {
+      "message": "Mostra 'Altre Estensioni!' collegamento"
+   },
+   "opt_looks_opt16": {
+      "message": "Mostra i permessi nella descrizioni del comando"
+   },
+   "opt_looks_opt17": {
+      "message": "Mostra 'New & Updated'"
+   },
+   "opt_looks_opt17a": {
+      "message": "Mostra 'Recentemente Disabilitato'"
+   },
+   "opt_looks_opt18": {
+      "message": "Barra di ricerca &amp; Sopra o sotto"
+   },
+   "opt_looks_opt19": {
+      "message": "Schede in basso sulla parte superiore"
+   },
+   "opt_looks_opt2": {
+      "message": "abilitato/disabilitato"
+   },
+   "opt_looks_opt20": {
+      "message": "Tema:"
+   },
+   "opt_looks_opt21": {
+      "message": "sistema predefinito"
+   },
+   "opt_looks_opt22": {
+      "message": "luce"
+   },
+   "opt_looks_opt23": {
+      "message": "buio"
+   },
+   "opt_looks_opt3": {
+      "message": "ordine alfabetico"
+   },
+   "opt_looks_opt4": {
+      "message": "Raggruppa la lista delle estensioni per categoria"
+   },
+   "opt_looks_opt5": {
+      "message": "Mostra la casella di controllo"
+   },
+   "opt_looks_opt6": {
+      "message": "Apri icona opzioni"
+   },
+   "opt_looks_opt7": {
+      "message": "Mostra icona disinstallazione"
+   },
+   "opt_looks_opt8": {
+      "message": "Mostra applicazioni"
+   },
+   "opt_looks_opt9": {
+      "message": "Mostra temi"
+   },
+   "opt_looks_optY": {
+      "message": "Mostra indicatore raggruppato"
+   },
+   "opt_looks_title": {
+      "message": "Aspetto"
+   },
+   "opt_resetbtn": {
+      "message": "Resetta impostazioni"
+   },
+   "opt_resetbtn_popupMsg": {
+      "message": "Ripristina le impostazioni?\nGruppi di interni saranno rimossi pure!"
+   },
+   "popup_btn_disable_text": {
+      "message": "Disabilita tutto"
+   },
+   "popup_btn_disable_tooltip": {
+      "message": "Disabilita solo le Estensioni"
+   },
+   "popup_btn_enable_text": {
+      "message": "Abilita"
+   },
+   "popup_btn_enable_tooltip": {
+      "message": "Abilita Estensioni"
+   },
+   "popup_checkbx_tooltip": {
+      "message": "Abilita/Disabilita"
+   },
+   "popup_disSelf_prompt_msg": {
+      "message": "Sei sicuro di voler disabilitare SERP Extension Manager?"
+   },
+   "popup_disSelf_prompt_no": {
+      "message": "No"
+   },
+   "popup_disSelf_prompt_yes": {
+      "message": "Sì"
+   },
+   "popup_extSet": {
+      "message": "Apri impostazioni"
+   },
+   "popup_header1": {
+      "message": "Estensioni"
+   },
+   "popup_header2": {
+      "message": "Apps"
+   },
+   "popup_header3": {
+      "message": "Temi"
+   },
+   "popup_headerL": {
+      "message": "Nuovo e Aggiornato"
+   },
+   "popup_headerLD": {
+      "message": "Disabilitati di recente"
+   },
+   "popup_icon_tooltip": {
+      "message": "Visita la Homepage"
+   },
+   "popup_manGrp": {
+      "message": "Gestisci gruppi"
+   },
+   "popup_noGrpMsg": {
+      "message": "Nessun gruppo di estensione. \u003Cbr/> Provare a creare uno nella pagina delle opzioni."
+   },
+   "popup_noItmMsg": {
+      "message": "Nessun elemento in questa categoria"
+   },
+   "popup_options_tooltip": {
+      "message": "Opzioni"
+   },
+   "popup_pNon": {
+      "message": "nessuno"
+   },
+   "popup_perm": {
+      "message": "Permessi"
+   },
+   "popup_rClick_add": {
+      "message": "Aggiungi in gruppo..."
+   },
+   "popup_rClick_mov": {
+      "message": "Muovi in gruppo..."
+   },
+   "popup_rClick_new": {
+      "message": "Inserire le estensioni abilitate in un nuovo gruppo"
+   },
+   "popup_rClick_ng": {
+      "message": "Nuovo gruppo..."
+   },
+   "popup_rClick_rem": {
+      "message": "Rimuovi dal gruppo"
+   },
+   "popup_search_no_result": {
+      "message": "Nessun elemento ' trovato"
+   },
+   "popup_search_tooltip": {
+      "message": "Digita parola cercata"
+   },
+   "popup_store": {
+      "message": "Ricevi più estensioni!"
+   },
+   "popup_tab2": {
+      "message": "Gruppi"
+   },
+   "popup_uninstall_prompt_cancel": {
+      "message": "Annulla"
+   },
+   "popup_uninstall_prompt_title": {
+      "message": "Conferma Disinstallazione"
+   },
+   "popup_uninstall_tooltip": {
+      "message": "Disinstalla"
+   }
+}

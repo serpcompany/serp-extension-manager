@@ -1,0 +1,383 @@
+{
+   "cLog_title": {
+      "message": "更新日志"
+   },
+   "cred_line1": {
+      "message": "弹出里的选项​​和卸载图标来自\u003Ca href=\"http://www.jigsoaricons.com/\">Jigsoar icons\u003C/a>。"
+   },
+   "cred_line2": {
+      "message": "上角图标来自\u003Ca href=\"https://developer.android.com/design/index.html\">Android Design\u003C/a>。"
+   },
+   "cred_title": {
+      "message": "声明"
+   },
+   "det_notInst": {
+      "message": "未安装"
+   },
+   "ext_font": {
+      "message": "'Segoe UI', Arial, 'Microsoft Yahei', Simsun, sans-serif"
+   },
+   "feed_text1": {
+      "message": "如果有bug，问题或建议可以在以下网站链接留言。"
+   },
+   "feed_text2": {
+      "message": "反馈链接！"
+   },
+   "feed_title": {
+      "message": "反馈"
+   },
+   "html_topbtn_tooltip1": {
+      "message": "设置"
+   },
+   "html_topbtn_tooltip2": {
+      "message": "声明及更新日志"
+   },
+   "html_topbtn_tooltip3": {
+      "message": "帮助"
+   },
+   "manage_menu": {
+      "message": "管理"
+   },
+   "manifest_description": {
+      "message": "这简单的菜单可让您方便的管理瀏覽器的扩展程序。"
+   },
+   "manifest_toolbarbtn_tooltip": {
+      "message": "管理扩展程序"
+   },
+   "opera_description": {
+      "message": "这简单的菜单可让您方便的管理瀏覽器的扩展程序。 \n 功能包括： \n - 通过弹出菜单来启用/禁用，访问选项和卸载扩展 \n - 定制弹出菜单容貌 \n - 制作扩展群组 \n - 通过弹出菜单和右键菜单启用/禁用扩展群组 \n - 启用活动页面 \n 更新日志可以在扩展的选项页面里找到。"
+   },
+   "opt_bigp_bkbtn": {
+      "message": "保存备份文件"
+   },
+   "opt_bigp_dropz": {
+      "message": "这里拖放文件\u003Cbr/>或\u003Cbr/>单击浏览"
+   },
+   "opt_bigp_iconf": {
+      "message": "继续扩展群组导入？请确保你已经安装了相同的扩展。"
+   },
+   "opt_bigp_idone": {
+      "message": "导入完成。"
+   },
+   "opt_bigp_ierrr": {
+      "message": "不正确的导入文件。"
+   },
+   "opt_bigp_iload": {
+      "message": "加载"
+   },
+   "opt_bigp_merge": {
+      "message": "加至现有的组"
+   },
+   "opt_bigp_overw": {
+      "message": "取代现有的组"
+   },
+   "opt_bigp_title1": {
+      "message": "备份群组"
+   },
+   "opt_bigp_title2": {
+      "message": "导入群组"
+   },
+   "opt_blogbtn_tooltip": {
+      "message": "访问我的博客"
+   },
+   "opt_egrp_delGrpBtn": {
+      "message": "删除群组"
+   },
+   "opt_egrp_editGrpBtn": {
+      "message": "编辑群组"
+   },
+   "opt_egrp_floatTitle1": {
+      "message": "制作新扩展群组"
+   },
+   "opt_egrp_floatTitle2": {
+      "message": "编辑扩展群组"
+   },
+   "opt_egrp_opt1": {
+      "message": "把扩展组成一组，并将它们作为一组的启用/禁用。"
+   },
+   "opt_egrp_opt10": {
+      "message": "只允许启用一组（重叠不包括）"
+   },
+   "opt_egrp_opt2": {
+      "message": "制作新群组"
+   },
+   "opt_egrp_opt3": {
+      "message": "不要显示右键菜单"
+   },
+   "opt_egrp_opt4": {
+      "message": "选择要包括的扩展:"
+   },
+   "opt_egrp_opt5": {
+      "message": "保存群组"
+   },
+   "opt_egrp_opt6": {
+      "message": "另存新组"
+   },
+   "opt_egrp_opt7": {
+      "message": "在此组内"
+   },
+   "opt_egrp_opt8": {
+      "message": "备份/导入"
+   },
+   "opt_egrp_opt9": {
+      "message": "扩展群组详细资料"
+   },
+   "opt_egrp_saveChgNam": {
+      "message": "已经有同名的群组了。"
+   },
+   "opt_egrp_saveOver": {
+      "message": "已经有同名的群组了。覆写该组？"
+   },
+   "opt_egrp_title": {
+      "message": "扩展群组"
+   },
+   "opt_func_opt1": {
+      "message": "点击名称可启动应用程序"
+   },
+   "opt_func_opt2": {
+      "message": "记住搜索栏的状态"
+   },
+   "opt_func_opt3": {
+      "message": "改用详细群组面板"
+   },
+   "opt_func_opt4": {
+      "message": "在弹出显示功能右键菜单"
+   },
+   "opt_func_title": {
+      "message": "功能类选项"
+   },
+   "opt_grpname_invalid": {
+      "message": "找到无效字符，请更改名称。"
+   },
+   "opt_looks_opt1": {
+      "message": "扩展名列表顺序按照:"
+   },
+   "opt_looks_opt10": {
+      "message": "显示底部的标签"
+   },
+   "opt_looks_opt11": {
+      "message": "使用另一个工具栏按钮图标"
+   },
+   "opt_looks_opt12": {
+      "message": "显示类别计数"
+   },
+   "opt_looks_opt13": {
+      "message": "显示搜索框"
+   },
+   "opt_looks_opt14": {
+      "message": "显示“全禁用”按钮"
+   },
+   "opt_looks_opt15": {
+      "message": "显示'获取更多扩展程序'链接"
+   },
+   "opt_looks_opt16": {
+      "message": "在工具提示中显示权限要求"
+   },
+   "opt_looks_opt17": {
+      "message": "显示“新增和更新”"
+   },
+   "opt_looks_opt17a": {
+      "message": "显示“最近禁用”"
+   },
+   "opt_looks_opt18": {
+      "message": "搜索栏和按钮置于顶部"
+   },
+   "opt_looks_opt19": {
+      "message": "底部的标签置于顶部"
+   },
+   "opt_looks_opt2": {
+      "message": "启用/禁用"
+   },
+   "opt_looks_opt20": {
+      "message": "主题:"
+   },
+   "opt_looks_opt21": {
+      "message": "系统默认"
+   },
+   "opt_looks_opt22": {
+      "message": "亮"
+   },
+   "opt_looks_opt23": {
+      "message": "暗"
+   },
+   "opt_looks_opt3": {
+      "message": "英文字母顺序排列"
+   },
+   "opt_looks_opt4": {
+      "message": "按类别小组扩展名列表"
+   },
+   "opt_looks_opt5": {
+      "message": "显示复选框"
+   },
+   "opt_looks_opt6": {
+      "message": "显示选项图标"
+   },
+   "opt_looks_opt7": {
+      "message": "显示卸载图标"
+   },
+   "opt_looks_opt8": {
+      "message": "显示应用部分"
+   },
+   "opt_looks_opt9": {
+      "message": "显示主题背景部分"
+   },
+   "opt_looks_optY": {
+      "message": "显示分组指示器"
+   },
+   "opt_looks_title": {
+      "message": "容貌类选项"
+   },
+   "opt_resetbtn": {
+      "message": "重设设定"
+   },
+   "opt_resetbtn_popupMsg": {
+      "message": "重设设置吗？\n扩展群组也将被删除！"
+   },
+   "other_text1": {
+      "message": "欢迎到我的DeviantArt来查看个人的其他作品！"
+   },
+   "other_title": {
+      "message": "其他作品"
+   },
+   "perm_reason1a": {
+      "message": "管理您的应用程序，扩展程序和主题背景"
+   },
+   "perm_reason1b": {
+      "message": "原因：如果没有这个权限就不能执行其基本功能"
+   },
+   "perm_text1": {
+      "message": "此扩展程序能取得:"
+   },
+   "perm_text2": {
+      "message": "点击\u003Ca href=\"http://developer.chrome.com/extensions/permission_warnings.html#warnings\">这里\u003C/a>可以查阅更多有关权限的问题"
+   },
+   "perm_title": {
+      "message": "权限要求"
+   },
+   "popup_btn_disable_text": {
+      "message": "全禁用"
+   },
+   "popup_btn_disable_tooltip": {
+      "message": "禁用扩展程序"
+   },
+   "popup_btn_enable_text": {
+      "message": "全启用"
+   },
+   "popup_btn_enable_tooltip": {
+      "message": "启用扩展程序"
+   },
+   "popup_checkbx_tooltip": {
+      "message": "启用/禁用"
+   },
+   "popup_disSelf_prompt_msg": {
+      "message": "您确定要禁用SERP Extension Manager本身？"
+   },
+   "popup_disSelf_prompt_no": {
+      "message": "否"
+   },
+   "popup_disSelf_prompt_yes": {
+      "message": "是"
+   },
+   "popup_extSet": {
+      "message": "打开浏览器的扩展设置"
+   },
+   "popup_header1": {
+      "message": "扩展程序"
+   },
+   "popup_header2": {
+      "message": "应用"
+   },
+   "popup_header3": {
+      "message": "主题背景"
+   },
+   "popup_headerL": {
+      "message": "新增和更新"
+   },
+   "popup_headerLD": {
+      "message": "最近禁用"
+   },
+   "popup_icon_tooltip": {
+      "message": "网站"
+   },
+   "popup_manGrp": {
+      "message": "管理群组&nbsp;"
+   },
+   "popup_noGrpMsg": {
+      "message": "没有扩展群组。\u003Cbr/>您可在选项页面制作扩展群组。"
+   },
+   "popup_noItmMsg": {
+      "message": "此类别中没有任何项目"
+   },
+   "popup_options_tooltip": {
+      "message": "选项"
+   },
+   "popup_pNon": {
+      "message": "无"
+   },
+   "popup_perm": {
+      "message": "权限要求"
+   },
+   "popup_rClick_add": {
+      "message": "添加到群组..."
+   },
+   "popup_rClick_mov": {
+      "message": "移动到别组..."
+   },
+   "popup_rClick_new": {
+      "message": "把启用中扩展放进新群组"
+   },
+   "popup_rClick_ng": {
+      "message": "新群组..."
+   },
+   "popup_rClick_rem": {
+      "message": "从组中删除"
+   },
+   "popup_search_no_result": {
+      "message": "没项目含有'"
+   },
+   "popup_search_tooltip": {
+      "message": "输入搜索关键字"
+   },
+   "popup_store": {
+      "message": "获取更多扩展程序"
+   },
+   "popup_tab2": {
+      "message": "群组"
+   },
+   "popup_uninstall_prompt_cancel": {
+      "message": "取消"
+   },
+   "popup_uninstall_prompt_title": {
+      "message": "确认卸载"
+   },
+   "popup_uninstall_tooltip": {
+      "message": "卸载"
+   },
+   "tips_tip1": {
+      "message": "复选框和扩展类型 (Chrome)"
+   },
+   "tips_tip1_line1": {
+      "message": "什么：不同类型的扩展会有不同外观的复选框"
+   },
+   "tips_tip1_line2": {
+      "message": "详细信息：应用=复选框有红色的边框; 主题背景=复选框被禁用"
+   },
+   "tips_tip2": {
+      "message": "在弹出的扩展中使用键盘进行导航"
+   },
+   "tips_tip2_line1": {
+      "message": "使用方法：触发弹出式窗口，然后使用箭头键导航"
+   },
+   "tips_tip2_line2": {
+      "message": "控制选项：左右方向键进行翻页，上下方向键在列表中进行滑动，Enter键表示选择链接"
+   },
+   "tips_tip3": {
+      "message": "为扩展建立快捷键"
+   },
+   "tips_tip3_line1": {
+      "message": "使用方法：在浏览器的“扩展程序”页面上，滚动到末尾，单击“配置命令”"
+   },
+   "tips_title": {
+      "message": "使用说明"
+   }
+}

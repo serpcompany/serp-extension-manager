@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
+    <title>
+      SERP Extension Manager Options
+    </title>
+	<link href="controls.css" rel="stylesheet" type="text/css" />
+	<link href="options.css" rel="stylesheet" type="text/css" />
+	<link href="scrollbar.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="options-dark.css" media="(prefers-color-scheme: dark)" id="dark" area="options">
+	<script src="common-lite.js"></script>
+	<script src="common.js"></script>
+	<!--script src="common-side.js"></script-->
+    <script src="options.js"></script>
+	<script src="theme.js"></script>
+	<script src="il8n.js"></script>
+
+  </head>
+  <body>
+    <center>	
+      <div class="header">
+        <div class="header-inner"><img class="headIco" src="icon-128.png"><font class="headerText">SERP Extension Manager</font> <font class="headerText2"><img id="topbtn1" class="headOpIco" src="settings.png" title="Settings"><a class="headerLink" href="credits.html"><img id="topbtn2" class="headOpIco" src="log.png" title="Credits and Changelog"></a><a class="headerLink" href="about.html"><img id="topbtn3" class="headOpIco" src="about.png" title="Information" ></a></font></div>
+      </div>
+	  
+      <div class="boxx">  
+		<div class="optionGrpTitle" i18n="opt_looks_title">
+          Looks
+        </div>
+		<div class="option">
+          <span i18n="opt_looks_opt20">Theme:</span>
+		  <div class="option"><input type="radio" id="theme1" name="theme" value="1"> <label for="theme1" i18n="opt_looks_opt21">system default</label></div>
+		  <div class="option"><input type="radio" id="theme2" name="theme" value="2"> <label for="theme2" i18n="opt_looks_opt22">light</label></div>
+		  <div class="option"><input type="radio" id="theme3" name="theme" value="3"> <label for="theme3" i18n="opt_looks_opt23">dark</label></div>
+        </div>
+		<div class="option">
+          <span i18n="opt_looks_opt1">Sort extension list by:</span>
+		  <div class="option"><input type="radio" id="sort1" name="sort" value="1"> <label for="sort1" i18n="opt_looks_opt2">enabled/disabled</label></div>
+		  <div class="option"><input type="radio" id="sort2" name="sort" value="2"> <label for="sort2" i18n="opt_looks_opt3">alphabetical order</label></div>
+        </div>
+        <div class="option" id="grpListCont">
+          <input type="checkbox" id="grpExt"> <label for="grpExt" i18n="opt_looks_opt4">Group extension list by category</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showChk"> <label for="showChk" i18n="opt_looks_opt5">Show checkbox</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showGrp"> <label for="showGrp" i18n="opt_looks_optY">Show grouped indicator</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="showSet"> <label for="showSet" i18n="opt_looks_opt6">Show options icon</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="showDel"> <label for="showDel" i18n="opt_looks_opt7">Show uninstall icon</label>
+        </div>
+		<div class="option" id="showAppCont">
+          <input type="checkbox" id="showApp"> <label for="showApp" i18n="opt_looks_opt8">Show apps</label>
+        </div>
+		<div class="option" id="showThmCont">
+          <input type="checkbox" id="showThm"> <label for="showThm" i18n="opt_looks_opt9">Show themes</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showLat"> <label for="showLat" i18n="opt_looks_opt17">Show latest</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showLD"> <label for="showLD" i18n="opt_looks_opt17a">Show recent disabled</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showCount"> <label for="showCount" i18n="opt_looks_opt12">Show category count</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showSearch"> <label for="showSearch" i18n="opt_looks_opt13">Show search box</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showDis"> <label for="showDis" i18n="opt_looks_opt14">Show disable all button</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="searchTop"> <label for="searchTop" i18n="opt_looks_opt18">Search bar & buttons on top</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showTab"> <label for="showTab" i18n="opt_looks_opt10">Show bottom tabs</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="tabTop"> <label for="tabTop" i18n="opt_looks_opt19">Bottom tabs on top</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showStore"> <label for="showStore" i18n="opt_looks_opt15">Show Chrome Web Store link</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="showP"> <label for="showP" i18n="opt_looks_opt16">Show permissions in tooltips</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="altBut"> <label for="altBut" i18n="opt_looks_opt11">Use alternate toolbar button</label>
+        </div>
+		
+		<div class="optionGrpTitle" id="funcCont" i18n="opt_func_title">
+          Function
+        </div>
+		<div class="option" id="launchAppCont">
+          <input type="checkbox" id="launchApp"> <label for="launchApp" i18n="opt_func_opt1">Launch app instead</label>
+        </div>
+		<div class="option" id="searchSaveCont">
+          <input type="checkbox" id="searchSave"> <label for="searchSave" i18n="opt_func_opt2">Remember search bar state</label>
+        </div>
+		<div class="option" id="rClickDelCont">
+          <input type="checkbox" id="rightClickDel"> <label for="rightClickDel" i18n="opt_func_opt4">Right-click item to uninstall</label>
+        </div>
+		<div class="option" id="advGrpVwCont">
+          <input type="checkbox" id="advGrpVw"> <label for="advGrpVw" i18n="opt_func_opt3">Switch to advanced groups view</label>
+        </div>
+		
+		<a name="groups"><div class="optionGrpTitle" i18n="opt_egrp_title">
+          Extension Groups
+        </div></a>
+		<div class="option" i18n="opt_egrp_opt1">
+			Group your extensions together to enable/disable them as a group.
+        </div>
+		
+		<div class="option">
+			<div id="main-extgrp-list" class="list" tabindex="0">
+			</div>
+			<button id="newGrpButton" class="small" i18n="opt_egrp_opt2">Create new group</button>
+			<button id="bakImpButton" class="small" i18n="opt_egrp_opt8">Backup/Import</button>
+			<button id="grpDetail" class="small" i18n="opt_egrp_opt9">View group details</button>
+        </div>
+		
+		<div class="option">
+          <input type="checkbox" id="noContext"> <label for="noContext" i18n="opt_egrp_opt3">Don't show right click menu</label>
+        </div>
+		<div class="option">
+          <input type="checkbox" id="onlyOne"> <label for="onlyOne" i18n="opt_egrp_opt10">Only allow one enabled group</label>
+        </div>
+		
+		<div class="spacing"></div>
+		<div class="footer">
+			<button id="resetButton" class="small" style="float:right;" i18n="opt_resetbtn">Reset settings</button>
+		</div>
+      </div>
+	  
+    </center>
+	
+	<div id="ovl" class="overlay hidden">
+	  
+		<div id="grping" class="innerOver">
+			<a id="closeOver"><img src="close.png"></a>
+			<div id="ovBoxTitle" class="optionGrpTitle left">
+			</div>
+			<input id="grpName" type="text" placeholder=" Name of group">
+			<div class="left" i18n="opt_egrp_opt4">Select extensions to include:</div>
+			<div id="sub-extgrp-list" class="list" tabindex="0">
+			</div>
+			<button id="savGrpButton" name="" class="small" style="float:right; margin-right:24px;margin-top:10px;" i18n="opt_egrp_opt5">Save group</button>
+			<button id="savNGrpButton" name="" class="small" style="float:right; margin-right:8px;margin-top:10px;" i18n="opt_egrp_opt6">Save as new group</button>
+		</div>
+		
+		<div id="bakImp" class="innerOver">
+			<a id="closeOver2"><img src="close.png"></a>
+			<div id="ovBoxTitle" class="optionGrpTitle left" i18n="opt_bigp_title1">
+				Backup Groups
+			</div>
+			<button id="backupButton" name="" style="display:block;width:12em;margin-right:auto;margin-left:auto;margin-top:10px;margin-bottom:40px;" class="small" i18n="opt_bigp_bkbtn">Save backup file</button>
+			<div id="linkCont" style="display:none;"></div>
+			<div id="ovBoxTitle" class="optionGrpTitle left" i18n="opt_bigp_title2">
+				Import Groups
+			</div>
+			<div class="option">
+				<input type="radio" id="import1" name="import" value="1"> <label for="import1" style="padding-right:6px;" i18n="opt_bigp_overw">replace existing groups </label>
+				<input type="radio" id="import2" name="import" value="2"> <label for="import2" i18n="opt_bigp_merge">add to existing groups</label>
+			</div>
+			<div id="drop_zone" i18n="opt_bigp_dropz">Drop file here<br/>or<br/>click to browse</div>
+			<input type="file" id="files" name="files[]" style="display:none;" />
+		</div>
+	  
+	</div>
+
+	<a class="headerLink bld" href="http://blandlifedev.blogspot.sg"><img id="blogbtn" src="bldLogo.png" title="Visit blogsite"></a>
+	
+  </body>
+</html>

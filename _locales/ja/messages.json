@@ -1,0 +1,383 @@
+{
+   "cLog_title": {
+      "message": "変更履歴"
+   },
+   "cred_line1": {
+      "message": "ポップアップ中のオプションとアンインストールのアイコンは\u003Ca href=\"http://www.jigsoaricons.com/\">Jigsoar icons\u003C/a>のものを利用しています。"
+   },
+   "cred_line2": {
+      "message": "上部の3アイコンは\u003Ca href=\"https://developer.android.com/design/index.html\">Android Design\u003C/a>のものを利用しています。"
+   },
+   "cred_title": {
+      "message": "謝辞"
+   },
+   "det_notInst": {
+      "message": "インストールされません"
+   },
+   "ext_font": {
+      "message": "'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro',Osaka, 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif"
+   },
+   "feed_text1": {
+      "message": "バグ、質問や提案に関して、次のリンクからメッセージを書いてください。"
+   },
+   "feed_text2": {
+      "message": "フィードバックのリンク！"
+   },
+   "feed_title": {
+      "message": "フィードバックを送信"
+   },
+   "html_topbtn_tooltip1": {
+      "message": "設定"
+   },
+   "html_topbtn_tooltip2": {
+      "message": "謝辞と変更履歴"
+   },
+   "html_topbtn_tooltip3": {
+      "message": "情報"
+   },
+   "manage_menu": {
+      "message": "管理"
+   },
+   "manifest_description": {
+      "message": "拡張機能のアクセス権限をシンプルなメニューを用いて有効化・無効化することができます。"
+   },
+   "manifest_toolbarbtn_tooltip": {
+      "message": "拡張機能を管理"
+   },
+   "opera_description": {
+      "message": "拡張機能のアクセス権限をシンプルなメニューを用いて有効化・無効化することができます。 \n 機能は次のとおりです。 \n - ポップアップメニューからに拡張を有効化/無効化、アクセスオプションおよびアンインストールする \n - ポップアップのカスタマイズ \n - 拡張グループを作成する \n - ポップアップや右クリックメニューを使用して拡張グループに有効化/無効化 \n - イベントページ使用 \n 更新された変更履歴は、拡張オプションページである。"
+   },
+   "opt_bigp_bkbtn": {
+      "message": "バックアップファイルを保存"
+   },
+   "opt_bigp_dropz": {
+      "message": "ここにファイルをドロップ\u003Cbr/>又は\u003Cbr/>閲覧をクリックして"
+   },
+   "opt_bigp_iconf": {
+      "message": "拡張グループは、インポートを続行しますか？　同じ拡張機能がインストールされていることを確認してください。"
+   },
+   "opt_bigp_idone": {
+      "message": "インポート完了。"
+   },
+   "opt_bigp_ierrr": {
+      "message": "無効なインポートファイル。"
+   },
+   "opt_bigp_iload": {
+      "message": "ロードされた"
+   },
+   "opt_bigp_merge": {
+      "message": "既存グループに追加"
+   },
+   "opt_bigp_overw": {
+      "message": "既存グループを置き換え"
+   },
+   "opt_bigp_title1": {
+      "message": "バックアップグループ"
+   },
+   "opt_bigp_title2": {
+      "message": "インポートグループ"
+   },
+   "opt_blogbtn_tooltip": {
+      "message": "ブログ"
+   },
+   "opt_egrp_delGrpBtn": {
+      "message": "グループを削除する"
+   },
+   "opt_egrp_editGrpBtn": {
+      "message": "グループを編集する"
+   },
+   "opt_egrp_floatTitle1": {
+      "message": "拡張グループを作成する"
+   },
+   "opt_egrp_floatTitle2": {
+      "message": "拡張グループを編集"
+   },
+   "opt_egrp_opt1": {
+      "message": "拡張機能をグループ分けすると一括有効/無効できます。"
+   },
+   "opt_egrp_opt10": {
+      "message": "一つのグループだけが有効に可能にする（重なっ例外）"
+   },
+   "opt_egrp_opt2": {
+      "message": "新しいグループを作成"
+   },
+   "opt_egrp_opt3": {
+      "message": "右クリックメニューを表示しない"
+   },
+   "opt_egrp_opt4": {
+      "message": "含める拡張機能を選択してください:"
+   },
+   "opt_egrp_opt5": {
+      "message": "グループを保存する"
+   },
+   "opt_egrp_opt6": {
+      "message": "新規グループとして保存"
+   },
+   "opt_egrp_opt7": {
+      "message": "このグループの中："
+   },
+   "opt_egrp_opt8": {
+      "message": "バックアップ/インポート"
+   },
+   "opt_egrp_opt9": {
+      "message": "グループの詳細"
+   },
+   "opt_egrp_saveChgNam": {
+      "message": "同じ名前のグループがすでにあります。"
+   },
+   "opt_egrp_saveOver": {
+      "message": "同じ名前のグループがすでにあります。そのグループを上書きしますか？"
+   },
+   "opt_egrp_title": {
+      "message": "拡張グループ"
+   },
+   "opt_func_opt1": {
+      "message": "名前をクリックしてアプリを起動"
+   },
+   "opt_func_opt2": {
+      "message": "検索バーの状態を覚えている"
+   },
+   "opt_func_opt3": {
+      "message": "詳細グループビューに切り替える"
+   },
+   "opt_func_opt4": {
+      "message": "ポップアップで機能的な右クリックメニューを表示"
+   },
+   "opt_func_title": {
+      "message": "機能"
+   },
+   "opt_grpname_invalid": {
+      "message": "無効な文字が見つかりましたので、名前を変更してください。"
+   },
+   "opt_looks_opt1": {
+      "message": "拡張リストのソート順序:"
+   },
+   "opt_looks_opt10": {
+      "message": "下部のタブを表示"
+   },
+   "opt_looks_opt11": {
+      "message": "別のツールバーボタンアイコンを使用"
+   },
+   "opt_looks_opt12": {
+      "message": "カテゴリ数を表示"
+   },
+   "opt_looks_opt13": {
+      "message": "検索ボックスを表示"
+   },
+   "opt_looks_opt14": {
+      "message": "'全無効'ボタンを表示"
+   },
+   "opt_looks_opt15": {
+      "message": "'他の拡張機能を見る'リンクを表示"
+   },
+   "opt_looks_opt16": {
+      "message": "ツールチップ中に表示アクセス権限"
+   },
+   "opt_looks_opt17": {
+      "message": "'新規と更新され'を表示"
+   },
+   "opt_looks_opt17a": {
+      "message": "'最近は無効'を表示"
+   },
+   "opt_looks_opt18": {
+      "message": "検索バーを、ポップアップの上部に表示する"
+   },
+   "opt_looks_opt19": {
+      "message": "下部のタブを、ポップアップの上部に表示する"
+   },
+   "opt_looks_opt2": {
+      "message": "有効/無効"
+   },
+   "opt_looks_opt20": {
+      "message": "テーマ:"
+   },
+   "opt_looks_opt21": {
+      "message": "システムデフォルト"
+   },
+   "opt_looks_opt22": {
+      "message": "ライト"
+   },
+   "opt_looks_opt23": {
+      "message": "ダーク"
+   },
+   "opt_looks_opt3": {
+      "message": "ABC順"
+   },
+   "opt_looks_opt4": {
+      "message": "カテゴリ別の拡張グループリスト"
+   },
+   "opt_looks_opt5": {
+      "message": "チェックボックスを表示する"
+   },
+   "opt_looks_opt6": {
+      "message": "オプションのアイコンを表示"
+   },
+   "opt_looks_opt7": {
+      "message": "アンインストールアイコンを表示"
+   },
+   "opt_looks_opt8": {
+      "message": "アプリを表示"
+   },
+   "opt_looks_opt9": {
+      "message": "テーマを表示"
+   },
+   "opt_looks_optY": {
+      "message": "グループ指標を表示する"
+   },
+   "opt_looks_title": {
+      "message": "外観"
+   },
+   "opt_resetbtn": {
+      "message": "設定をリセットする"
+   },
+   "opt_resetbtn_popupMsg": {
+      "message": "本当に設定をリセットしますか？\n拡張グループも同様に削除されます！"
+   },
+   "other_text1": {
+      "message": "私の他の作品を見るために私のDeviantArtのページに立ち寄ってください！"
+   },
+   "other_title": {
+      "message": "その他の製品"
+   },
+   "perm_reason1a": {
+      "message": "あなたのアプリ、拡張機能、およびテーマを管理する"
+   },
+   "perm_reason1b": {
+      "message": "なぜか？: この権限なしでは、この拡張は拡張機能の管理を行なうことができません。"
+   },
+   "perm_text1": {
+      "message": "この拡張機能は下記の権限にアクセスするできます:"
+   },
+   "perm_text2": {
+      "message": "権限アクセスの詳細については\u003Ca href=\"http://developer.chrome.com/extensions/permission_warnings.html#warnings\">こちら\u003C/a>をご覧ください"
+   },
+   "perm_title": {
+      "message": "アクセス権限に関する理由"
+   },
+   "popup_btn_disable_text": {
+      "message": "全無効"
+   },
+   "popup_btn_disable_tooltip": {
+      "message": "拡張機能だけ全無効"
+   },
+   "popup_btn_enable_text": {
+      "message": "全有効"
+   },
+   "popup_btn_enable_tooltip": {
+      "message": "拡張機能有効"
+   },
+   "popup_checkbx_tooltip": {
+      "message": "有効/無効"
+   },
+   "popup_disSelf_prompt_msg": {
+      "message": "あなたはSERP Extension Manager自体を無効にしますか？"
+   },
+   "popup_disSelf_prompt_no": {
+      "message": "いいえ"
+   },
+   "popup_disSelf_prompt_yes": {
+      "message": "はい"
+   },
+   "popup_extSet": {
+      "message": "ブラウザの拡張機能設定"
+   },
+   "popup_header1": {
+      "message": "拡張機能"
+   },
+   "popup_header2": {
+      "message": "アプリ"
+   },
+   "popup_header3": {
+      "message": "テーマ"
+   },
+   "popup_headerL": {
+      "message": "新規と更新され"
+   },
+   "popup_headerLD": {
+      "message": "最近は無効"
+   },
+   "popup_icon_tooltip": {
+      "message": "ホームページ"
+   },
+   "popup_manGrp": {
+      "message": "グループの管理"
+   },
+   "popup_noGrpMsg": {
+      "message": "拡張機能のグループが存在しません。オプションページでグループを作成してください。"
+   },
+   "popup_noItmMsg": {
+      "message": "このカテゴリは空です。"
+   },
+   "popup_options_tooltip": {
+      "message": "オプション"
+   },
+   "popup_pNon": {
+      "message": "なし"
+   },
+   "popup_perm": {
+      "message": "アクセス権限"
+   },
+   "popup_rClick_add": {
+      "message": "グループに追加..."
+   },
+   "popup_rClick_mov": {
+      "message": "別グループへ移動..."
+   },
+   "popup_rClick_new": {
+      "message": "有効拡張機能を新しいグループに入れた"
+   },
+   "popup_rClick_ng": {
+      "message": "新しいグループ..."
+   },
+   "popup_rClick_rem": {
+      "message": "グループから削除"
+   },
+   "popup_search_no_result": {
+      "message": "そのキーワードのアイテム見つけません: '"
+   },
+   "popup_search_tooltip": {
+      "message": "検索キーワードを入力"
+   },
+   "popup_store": {
+      "message": "他の拡張機能を見る"
+   },
+   "popup_tab2": {
+      "message": "グループ"
+   },
+   "popup_uninstall_prompt_cancel": {
+      "message": "キャンセル"
+   },
+   "popup_uninstall_prompt_title": {
+      "message": "削除の確認"
+   },
+   "popup_uninstall_tooltip": {
+      "message": "アンインストール"
+   },
+   "tips_tip1": {
+      "message": "チェックボックスと拡張機能 (Chrome)"
+   },
+   "tips_tip1_line1": {
+      "message": "何と: チェックボックスの機能と外観は。拡張機能の種類ごとに異なります"
+   },
+   "tips_tip1_line2": {
+      "message": "詳細: アプリのチェックボックスは、枠が赤くなります。; テーマのチェックボックスは無効になっています。"
+   },
+   "tips_tip2": {
+      "message": "ポップアップのキーボードナビゲーション"
+   },
+   "tips_tip2_line1": {
+      "message": "何と: ポップアップが出てきた時、矢印キーを使用して操作できます。"
+   },
+   "tips_tip2_line2": {
+      "message": "操作: ↑, ↓ = 上下を選択; Space = 有効/無効を切り替える; o = 拡張機能のオプションページを起動"
+   },
+   "tips_tip3": {
+      "message": "拡張機能にキーボードショートカットを割り当てる"
+   },
+   "tips_tip3_line1": {
+      "message": "何と: ブラウザの拡張機能設定ページの一番下には「キーボード ショートカット」というボタンがあります。"
+   },
+   "tips_title": {
+      "message": "使い方のヒント"
+   }
+}

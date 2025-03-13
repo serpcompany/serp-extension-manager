@@ -1,0 +1,383 @@
+{
+   "cLog_title": {
+      "message": "Changelog"
+   },
+   "cred_line1": {
+      "message": "Options and Uninstall icons in popup from \u003Ca href=\"http://www.jigsoaricons.com/\">Jigsoar icons\u003C/a>."
+   },
+   "cred_line2": {
+      "message": "Additional credits to \u003Ca href=\"https://developer.android.com/design/index.html\">Android Design\u003C/a> for the 3 icons located top right."
+   },
+   "cred_title": {
+      "message": "Credits"
+   },
+   "det_notInst": {
+      "message": "Not installed"
+   },
+   "ext_font": {
+      "message": "'Segoe UI', Tahoma, sans-serif"
+   },
+   "feed_text1": {
+      "message": "Feel free to leave a message in regards to bugs, questions or suggestions."
+   },
+   "feed_text2": {
+      "message": "Feedback here!"
+   },
+   "feed_title": {
+      "message": "Feedback"
+   },
+   "html_topbtn_tooltip1": {
+      "message": "Settings"
+   },
+   "html_topbtn_tooltip2": {
+      "message": "Credits and Changelog"
+   },
+   "html_topbtn_tooltip3": {
+      "message": "Information"
+   },
+   "manage_menu": {
+      "message": "Manage"
+   },
+   "manifest_description": {
+      "message": "A simple menu to enable, disable and access options of extensions."
+   },
+   "manifest_toolbarbtn_tooltip": {
+      "message": "Manage extensions"
+   },
+   "opera_description": {
+      "message": "Just a simple extension manager. \n Features include: \n - basic function to enable/disable, access options and uninstall extensions via popup \n - customize the popup \n - ability to create extension groups \n - enable/disable extension groups via popup and right-click menu \n - event page enabled \n Updated changelog is in the extension option pages."
+   },
+   "opt_bigp_bkbtn": {
+      "message": "Save backup file"
+   },
+   "opt_bigp_dropz": {
+      "message": "Drop file here\u003Cbr/>or\u003Cbr/>click to browse"
+   },
+   "opt_bigp_iconf": {
+      "message": "Proceed with extension groups import? Do ensure you have the same extensions installed."
+   },
+   "opt_bigp_idone": {
+      "message": "Import Complete."
+   },
+   "opt_bigp_ierrr": {
+      "message": "Invalid import file."
+   },
+   "opt_bigp_iload": {
+      "message": "loaded"
+   },
+   "opt_bigp_merge": {
+      "message": "add to existing groups"
+   },
+   "opt_bigp_overw": {
+      "message": "replace existing groups"
+   },
+   "opt_bigp_title1": {
+      "message": "Backup Groups"
+   },
+   "opt_bigp_title2": {
+      "message": "Import Groups"
+   },
+   "opt_blogbtn_tooltip": {
+      "message": "Visit blogsite"
+   },
+   "opt_egrp_delGrpBtn": {
+      "message": "Delete group"
+   },
+   "opt_egrp_editGrpBtn": {
+      "message": "Edit group"
+   },
+   "opt_egrp_floatTitle1": {
+      "message": "Create Extension Group"
+   },
+   "opt_egrp_floatTitle2": {
+      "message": "Edit Extension Group"
+   },
+   "opt_egrp_opt1": {
+      "message": "Group your extensions together to enable/disable them as a group."
+   },
+   "opt_egrp_opt10": {
+      "message": "Only allow one enabled group (overlap exception)"
+   },
+   "opt_egrp_opt2": {
+      "message": "Create new group"
+   },
+   "opt_egrp_opt3": {
+      "message": "Don't show right click menu"
+   },
+   "opt_egrp_opt4": {
+      "message": "Select extensions to include:"
+   },
+   "opt_egrp_opt5": {
+      "message": "Save group"
+   },
+   "opt_egrp_opt6": {
+      "message": "Save as new group"
+   },
+   "opt_egrp_opt7": {
+      "message": "Grouped in:"
+   },
+   "opt_egrp_opt8": {
+      "message": "Backup/Import"
+   },
+   "opt_egrp_opt9": {
+      "message": "View group details"
+   },
+   "opt_egrp_saveChgNam": {
+      "message": "There's already a group with the same name."
+   },
+   "opt_egrp_saveOver": {
+      "message": "There's already a group with the same name. Overwrite group?"
+   },
+   "opt_egrp_title": {
+      "message": "Extension Groups"
+   },
+   "opt_func_opt1": {
+      "message": "Click name to launch app"
+   },
+   "opt_func_opt2": {
+      "message": "Remember search bar state"
+   },
+   "opt_func_opt3": {
+      "message": "Switch to advanced groups view"
+   },
+   "opt_func_opt4": {
+      "message": "Show functional right-click menus in popup"
+   },
+   "opt_func_title": {
+      "message": "Function"
+   },
+   "opt_grpname_invalid": {
+      "message": "Please use only alphanumeric characters."
+   },
+   "opt_looks_opt1": {
+      "message": "Sort extension list by:"
+   },
+   "opt_looks_opt10": {
+      "message": "Show bottom tabs"
+   },
+   "opt_looks_opt11": {
+      "message": "Use alternate toolbar button icon"
+   },
+   "opt_looks_opt12": {
+      "message": "Show category count"
+   },
+   "opt_looks_opt13": {
+      "message": "Show search box"
+   },
+   "opt_looks_opt14": {
+      "message": "Show 'disable all' button"
+   },
+   "opt_looks_opt15": {
+      "message": "Show 'Get more extensions!' link"
+   },
+   "opt_looks_opt16": {
+      "message": "Show permissions in tooltips"
+   },
+   "opt_looks_opt17": {
+      "message": "Show 'New & Updated'"
+   },
+   "opt_looks_opt17a": {
+      "message": "Show 'Recently Disabled'"
+   },
+   "opt_looks_opt18": {
+      "message": "Search bar &amp; buttons on top"
+   },
+   "opt_looks_opt19": {
+      "message": "Bottom tabs on top"
+   },
+   "opt_looks_opt2": {
+      "message": "enabled/disabled"
+   },
+   "opt_looks_opt20": {
+      "message": "Theme:"
+   },
+   "opt_looks_opt21": {
+      "message": "system default"
+   },
+   "opt_looks_opt22": {
+      "message": "light"
+   },
+   "opt_looks_opt23": {
+      "message": "dark"
+   },
+   "opt_looks_opt3": {
+      "message": "alphabetical order"
+   },
+   "opt_looks_opt4": {
+      "message": "Group extension list by category"
+   },
+   "opt_looks_opt5": {
+      "message": "Show checkbox"
+   },
+   "opt_looks_opt6": {
+      "message": "Show options icon"
+   },
+   "opt_looks_opt7": {
+      "message": "Show uninstall icon"
+   },
+   "opt_looks_opt8": {
+      "message": "Show apps"
+   },
+   "opt_looks_opt9": {
+      "message": "Show themes"
+   },
+   "opt_looks_optY": {
+      "message": "Show grouped indicator"
+   },
+   "opt_looks_title": {
+      "message": "Looks"
+   },
+   "opt_resetbtn": {
+      "message": "Reset settings"
+   },
+   "opt_resetbtn_popupMsg": {
+      "message": "Reset settings?\nExtension groups will be removed as well!"
+   },
+   "other_text1": {
+      "message": "Do drop by my DeviantArt page to see more of my works!"
+   },
+   "other_title": {
+      "message": "Other Works"
+   },
+   "perm_reason1a": {
+      "message": "Manage your apps, extensions, and themes"
+   },
+   "perm_reason1b": {
+      "message": "WHY: Without this permission the extension cannot perform its basic functions"
+   },
+   "perm_text1": {
+      "message": "As stated SERP Extension Manager can access:"
+   },
+   "perm_text2": {
+      "message": "You can find out more about permission warning triggers \u003Ca href=\"http://developer.chrome.com/extensions/permission_warnings.html#warnings\">here\u003C/a>"
+   },
+   "perm_title": {
+      "message": "Reason For Permission Requests"
+   },
+   "popup_btn_disable_text": {
+      "message": "Disable All"
+   },
+   "popup_btn_disable_tooltip": {
+      "message": "Disable All Extensions only"
+   },
+   "popup_btn_enable_text": {
+      "message": "Enable"
+   },
+   "popup_btn_enable_tooltip": {
+      "message": "Enable Extensions"
+   },
+   "popup_checkbx_tooltip": {
+      "message": "Enable/Disable"
+   },
+   "popup_disSelf_prompt_msg": {
+      "message": "Are you sure you want to disable SERP Extension Manager itself?"
+   },
+   "popup_disSelf_prompt_no": {
+      "message": "No"
+   },
+   "popup_disSelf_prompt_yes": {
+      "message": "Yes"
+   },
+   "popup_extSet": {
+      "message": "Open browser's extension settings"
+   },
+   "popup_header1": {
+      "message": "Extensions"
+   },
+   "popup_header2": {
+      "message": "Apps"
+   },
+   "popup_header3": {
+      "message": "Themes"
+   },
+   "popup_headerL": {
+      "message": "New & Updated"
+   },
+   "popup_headerLD": {
+      "message": "Recently Disabled"
+   },
+   "popup_icon_tooltip": {
+      "message": "Visit Homepage"
+   },
+   "popup_manGrp": {
+      "message": "Manage groups"
+   },
+   "popup_noGrpMsg": {
+      "message": "No extension groups.\u003Cbr/>Try creating one in the options page."
+   },
+   "popup_noItmMsg": {
+      "message": "No items in this category"
+   },
+   "popup_options_tooltip": {
+      "message": "Options"
+   },
+   "popup_pNon": {
+      "message": "none"
+   },
+   "popup_perm": {
+      "message": "Permissions"
+   },
+   "popup_rClick_add": {
+      "message": "Add to group..."
+   },
+   "popup_rClick_mov": {
+      "message": "Move to group..."
+   },
+   "popup_rClick_new": {
+      "message": "Put enabled extensions in a new group"
+   },
+   "popup_rClick_ng": {
+      "message": "New group..."
+   },
+   "popup_rClick_rem": {
+      "message": "Remove from group"
+   },
+   "popup_search_no_result": {
+      "message": "No items found for '"
+   },
+   "popup_search_tooltip": {
+      "message": "Enter search keyword"
+   },
+   "popup_store": {
+      "message": "Get more extensions!"
+   },
+   "popup_tab2": {
+      "message": "Groups"
+   },
+   "popup_uninstall_prompt_cancel": {
+      "message": "Cancel"
+   },
+   "popup_uninstall_prompt_title": {
+      "message": "Confirm Uninstall"
+   },
+   "popup_uninstall_tooltip": {
+      "message": "Uninstall"
+   },
+   "tips_tip1": {
+      "message": "Checkbox and extension type (Chrome)"
+   },
+   "tips_tip1_line1": {
+      "message": "WHAT: The checkbox looks and functions differently for different extension types"
+   },
+   "tips_tip1_line2": {
+      "message": "DETAIL: Apps = checkbox has a red border; Themes = checkbox is disabled"
+   },
+   "tips_tip2": {
+      "message": "Keyboard navigation in the extension popup"
+   },
+   "tips_tip2_line1": {
+      "message": "HOW: Trigger the popup then use arrow keys to navigate"
+   },
+   "tips_tip2_line2": {
+      "message": "CONTROLS: ↑, ↓ = Run through the extension list; Space = toggle enable/disable; o = Bring up extension's option page"
+   },
+   "tips_tip3": {
+      "message": "Assign a keyboard shortcut to the extension"
+   },
+   "tips_tip3_line1": {
+      "message": "HOW: Go to the browser's Extensions settings page, scroll to the end and click \"Configure commands\""
+   },
+   "tips_title": {
+      "message": "Usage Tips"
+   }
+}

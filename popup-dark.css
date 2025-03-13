@@ -1,0 +1,76 @@
+body {
+  background-color: #292A2D;
+  color: #E8EAED;
+}
+
+h1,.advGrpTitle {
+border-color: #3C4043;
+}
+
+.grpDiv:hover {
+background:#202124;
+}
+
+.ext:hover {
+color: #292A2D;
+}
+.ext:focus {
+color: #292A2D;
+}
+.ext.dev {
+color: #292A2D;
+}
+.ext.dev:hover {
+color: #292A2D;
+}
+.ext.dev:focus {
+color: #292A2D;
+}
+
+.sideB{filter: invert(1);}
+.ext:hover .sideB{
+filter: invert(0);
+}
+
+.tabs{
+background-color: #414245;
+border-color: #292A2D;
+}
+#storeCont{
+background-color: #414245;
+border-color: #414245;
+}
+.tActive{
+background-color: #292A2D;
+}
+
+#searchQ{
+border-color: #305464;
+color: #E8EAED;
+}
+button.topBtn{
+background-color: #292A2D;
+border-color: #305464;
+}
+
+.rMenu {
+background: #414245;
+}
+.rMenuItem:hover {
+color: #292A2D;
+}
+.rMenu hr{
+background: #999;
+}
+
+.overlay{
+background: rgba(100,100,100,.6);
+}
+
+#titleBox{
+color: #292A2D;
+}
+
+::-webkit-scrollbar-track {
+background:#292A2D;
+}

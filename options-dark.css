@@ -1,0 +1,51 @@
+body{
+background: #292A2D;
+color: #E8EAED;
+}
+
+.header {
+background-image:-webkit-linear-gradient(#292A2D,#292A2D 40%,rgba(41,42,45,.92));
+color:#E8EAED;
+}
+
+.headIco,.headOpIco {
+	filter: invert(1);
+}
+
+.ext:hover {
+color: #292A2D;
+}
+.ext:focus {
+color: #292A2D;
+}
+
+ul{
+	color: #E8EAED;
+}
+
+.dItems a{
+	color: #E8EAED;
+}
+
+.footer {
+background-image:-webkit-linear-gradient(rgba(41,42,45,0.22) 0%,rgba(41,42,45,.62) 30%,rgba(41,42,45,.82) 60%,#292A2D 90%);
+}
+
+.overlay{
+background: rgba(100,100,100,.6);
+}
+
+.innerOver{
+	color: #292A2D;
+}
+
+.option a:link {
+  color: #0082FC;
+}
+.option a:visited {
+  color: #881D61;
+}
+
+::-webkit-scrollbar-track {
+background:#292A2D;
+}
