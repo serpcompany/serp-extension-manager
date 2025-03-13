@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG to PNG Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px;
+            line-height: 1.5;
+        }
+        button { 
+            padding: 12px 20px; 
+            background: #4361ee; 
+            color: white; 
+            border: none; 
+            border-radius: 4px;
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background: #3a56d4;
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .icon-preview { 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+        .icon-preview svg {
+            margin-bottom: 8px;
+        }
+        .progress { 
+            margin: 20px 0;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .filename {
+            font-size: 12px;
+            text-align: center;
+            word-break: break-all;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SVG to PNG Converter</h1>
+    <p>This tool converts SVG icons to PNG format and creates a downloadable ZIP file with all icons.</p>
+    
+    <button id="convert">Convert All and Download ZIP</button>
+    
+    <div class="progress">
+        <div id="status">Ready to convert (12 icons)</div>
+    </div>
+    
+    <h2>Icon Preview</h2>
+    <div id="preview" class="icon-grid"></div>
+    
+    <script>
+    // SVG data for all icons
+    const svgs = {
+        "icon-16.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#444444"/>
+</svg>`,
+        "icon-19-0.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#444444"/>
+</svg>`,
+        "icon-19-1.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#FF0000"/>
+</svg>`,
+        "icon-19-2.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#FFFFFF"/>
+</svg>`,
+        "icon-38-0.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#444444"/>
+</svg>`,
+        "icon-38-1.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#FF0000"/>
+</svg>`,
+        "icon-38-2.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#FFFFFF"/>
+</svg>`,
+        "icon-48.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#444444"/>
+</svg>`,
+        "icon-128.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="#444444"/>
+</svg>`,
+        "icon-gen0.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="fullColorGradient0" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3498db" />
+      <stop offset="50%" stop-color="#2980b9" />
+      <stop offset="100%" stop-color="#1f618d" />
+    </linearGradient>
+  </defs>
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="url(#fullColorGradient0)"/>
+</svg>`,
+        "icon-gen128.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="fullColorGradient128" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3498db" />
+      <stop offset="50%" stop-color="#2980b9" />
+      <stop offset="100%" stop-color="#1f618d" />
+    </linearGradient>
+  </defs>
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="url(#fullColorGradient128)"/>
+</svg>`,
+        "icon.png": `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="fullColorGradientIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3498db" />
+      <stop offset="50%" stop-color="#2980b9" />
+      <stop offset="100%" stop-color="#1f618d" />
+    </linearGradient>
+  </defs>
+  <path d="M3 12.673c3 -2.6 6 -5.2 9 -7.8 3 2.6 6 5.2 9 7.8v6.4c-4.1 -3.6 -8.2 -7.1 -12.3 -10.7 0.7 1.3 1.4 2.6 2.2 4 -2.6 2.2 -5.2 4.5 -7.8 6.7 0 -2.1 0 -4.3 -0.1 -6.4z" fill="url(#fullColorGradientIcon)"/>
+</svg>`
+    };
+    
+    // Create background for white icons
+    function createSvgPreview(svgContent, filename) {
+        const div = document.createElement('div');
+        div.className = 'icon-preview';
+        
+        // Add SVG with background for white icons
+        if (filename.includes('-2.png')) {
+            div.style.background = '#444'; // Dark background for white icons
+        }
+        
+        // Insert SVG
+        div.innerHTML = svgContent + `<div class="filename">${filename}</div>`;
+        return div;
+    }
+    
+    // Preview SVGs
+    const previewEl = document.getElementById('preview');
+    Object.entries(svgs).forEach(([filename, svg]) => {
+        previewEl.appendChild(createSvgPreview(svg, filename));
+    });
+    
+    // Convert SVGs to PNGs and create ZIP
+    document.getElementById('convert').addEventListener('click', async () => {
+        const status = document.getElementById('status');
+        const convertBtn = document.getElementById('convert');
+        convertBtn.disabled = true;
+        status.textContent = 'Starting conversion...';
+        
+        try {
+            const zip = new JSZip();
+            const total = Object.keys(svgs).length;
+            let completed = 0;
+            
+            for (const [filename, svgContent] of Object.entries(svgs)) {
+                status.textContent = `Converting ${filename} (${completed + 1}/${total})`;
+                
+                // Parse the SVG to ensure proper sizing and gradient IDs
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
+                
+                // Ensure unique gradient IDs
+                const gradients = svgDoc.querySelectorAll('linearGradient');
+                gradients.forEach((gradient, index) => {
+                    const uniqueId = `gradient_${filename.replace(/\W/g, '')}_${index}`;
+                    const oldId = gradient.getAttribute('id');
+                    gradient.setAttribute('id', uniqueId);
+                    
+                    // Update references to this gradient
+                    const paths = svgDoc.querySelectorAll(`[fill="url(#${oldId})"]`);
+                    paths.forEach(path => {
+                        path.setAttribute('fill', `url(#${uniqueId})`);
+                    });
+                });
+                
+                // Serialize SVG back to string
+                const serializer = new XMLSerializer();
+                const processedSvg = serializer.serializeToString(svgDoc);
+                
+                // Create SVG blob
+                const svgBlob = new Blob([processedSvg], { type: 'image/svg+xml' });
+                const svgUrl = URL.createObjectURL(svgBlob);
+                
+                // Load image
+                const img = new Image();
+                await new Promise((resolve, reject) => {
+                    img.onload = resolve;
+                    img.onerror = reject;
+                    img.src = svgUrl;
+                });
+                
+                // Get dimensions from filename prefix (e.g., icon-16.png -> 16x16)
+                let width, height;
+                if (filename.includes('16')) {
+                    width = height = 16;
+                } else if (filename.includes('19')) {
+                    width = height = 19;
+                } else if (filename.includes('38')) {
+                    width = height = 38;
+                } else if (filename.includes('48')) {
+                    width = height = 48;
+                } else if (filename.includes('128')) {
+                    width = height = 128;
+                } else {
+                    width = 16; // Default for icon.png
+                    height = 16;
+                }
+                
+                // Draw to canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                
+                // For white icons on transparent background
+                if (filename.includes('-2.png')) {
+                    ctx.fillStyle = 'transparent';
+                    ctx.fillRect(0, 0, width, height);
+                }
+                
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                // Get PNG data
+                const pngData = await new Promise(resolve => {
+                    canvas.toBlob(blob => resolve(blob), 'image/png');
+                });
+                
+                // Add to ZIP
+                zip.file(filename, pngData);
+                
+                // Clean up
+                URL.revokeObjectURL(svgUrl);
+                completed++;
+            }
+            
+            status.textContent = 'Creating ZIP file...';
+            const zipBlob = await zip.generateAsync({ type: 'blob' });
+            saveAs(zipBlob, 'icons.zip');
+            
+            status.textContent = 'Download complete!';
+            convertBtn.disabled = false;
+        } catch (error) {
+            status.textContent = `Error: ${error.message}`;
+            console.error(error);
+            convertBtn.disabled = false;
+        }
+    });
+    </script>
+</body>
+</html>
