@@ -51,7 +51,7 @@ function getIconURL(extInfo, size) {
 			}
 		}
 	}
-	return chrome.extension.getURL('icon-gen' + size + '.png');
+	return chrome.runtime.getURL('icon-gen' + size + '.png');
 }
 
 //superb sort function from
@@ -485,7 +485,7 @@ function menuCreate() {
 			chrome.contextMenus.create({
 				"title" : extGrpObj.name,
 				"type" : "checkbox",
-				"contexts" : ['page', 'browser_action'],
+				"contexts" : ['page', 'action'],
 				"id" : extGrpObj.id,
 				"checked" : extGrpObj.enabled
 			});
@@ -497,7 +497,7 @@ function updateIcon() {
 	var settings = JSON.parse(localStorage["settings"]);
 
 	if (settings.altBut) {
-		chrome.browserAction.setIcon({
+		chrome.action.setIcon({
 			path : {
 				"19" : "icon-19-1.png",
 				"38" : "icon-38-1.png"
@@ -506,7 +506,7 @@ function updateIcon() {
 	} else {
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			// dark mode
-			chrome.browserAction.setIcon({
+			chrome.action.setIcon({
 				path : {
 					"19" : "icon-19-2.png",
 					"38" : "icon-38-2.png"
@@ -514,7 +514,7 @@ function updateIcon() {
 			});
 		}
 		else{
-			chrome.browserAction.setIcon({
+			chrome.action.setIcon({
 				path : {
 					"19" : "icon-19-0.png",
 					"38" : "icon-38-0.png"
