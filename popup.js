@@ -1,5 +1,6 @@
-var settings = JSON.parse(localStorage.settings);
-var GRPindex = JSON.parse(localStorage.GRPindex);
+// Initialize default settings if not present
+var settings = localStorage.settings ? JSON.parse(localStorage.settings) : {};
+var GRPindex = localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : [];
 var filterTimeOut, filterStrings, reloadTimeOut;
 var popHeight, popWidth;
 
@@ -258,6 +259,7 @@ function makeRow(extInfo,fragment,grp) {
 		element1.type = "checkbox";
 		element1.title = chrome.i18n.getMessage("popup_checkbx_tooltip");
 		element1.checked = extInfo.enabled;
+		element1.style.opacity = "1";
 		if(extType!="extGrp") {
 			element1.addEventListener('click',function(){enableExt(extInfo.id,true);});
 			element1.className += " ch."+extInfo.id;
@@ -508,78 +510,100 @@ function makeExtCatRows(extList) {
 
 function makeGrpRows(container) {
 	var fragment = document.createDocumentFragment();
-	for(var i=0, j=GRPindex.length; i<j; i++) {
-		var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-		if (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings))){
-			makeRow(extGrpObj,fragment);
+	var localGRPindex = localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : [];
+	
+	for(var i=0, j=localGRPindex.length; i<j; i++) {
+		try {
+			var grpKey = "GRP-" + localGRPindex[i];
+			if (!localStorage[grpKey]) {
+				console.log("Missing group data for: " + localGRPindex[i]);
+				continue;
+			}
+			
+			var extGrpObj = JSON.parse(localStorage[grpKey]);
+			if (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings))){
+				makeRow(extGrpObj, fragment);
+			}
+		} catch (error) {
+			console.log("Error processing group at index " + i + ": " + error.message);
 		}
 	}
-	chkEmptyPgItm(fragment,"grp");
-	writeToPage(fragment,container);
+	chkEmptyPgItm(fragment, "grp");
+	writeToPage(fragment, container);
 }
 
 function makeAdvGrps(container) {
 	chrome.management.getAll(function(extList) {
-		var GRPindex = JSON.parse(localStorage.GRPindex);
-		var fragment2 =  document.createDocumentFragment();
+		var GRPindex = localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : [];
+		var fragment2 = document.createDocumentFragment();
 		for(var i=0, j=GRPindex.length; i<j; i++) {
-			var fragment = document.createDocumentFragment();
-			var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-			var grpId = extGrpObj.name;
-			var extIDinGrp = extGrpObj.items;
-			var searchHit = 0;
-		
-			makeRow(extGrpObj,fragment,grpId);
-			
-			var box = document.createElement("div");
-			box.className = "grpDiv panel";
-			box.id = "panel."+grpId;
-			if(extGrpObj.expand){box.style.display = "block";}
-			else{box.style.display = "none";}
-			
-			if(settings.sortMode=="1"){
-				var fragOn =  fragment.cloneNode();
-				var fragOff =  fragment.cloneNode();
-				var fragNot =  fragment.cloneNode();
-				for(var w = 0, q = extIDinGrp.length; w < q; w++){
-					var found = isInstalled(extList, extIDinGrp[w]);
-					if(found[0]){
-						exInfo = found[1];
-						if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
-						searchHit++;
-						if(exInfo.enabled){makeRow(exInfo,fragOn,grpId);}
-						else{makeRow(exInfo,fragOff,grpId);}
+			try {
+				var grpKey = "GRP-"+GRPindex[i];
+				if (!localStorage[grpKey]) {
+					console.log("Missing group data for: " + GRPindex[i]);
+					continue;
+				}
+				
+				var extGrpObj = JSON.parse(localStorage[grpKey]);
+				var grpId = extGrpObj.name;
+				var extIDinGrp = extGrpObj.items || [];
+				var searchHit = 0;
+				
+				var fragment = document.createDocumentFragment();
+				makeRow(extGrpObj, fragment, grpId);
+				
+				var box = document.createElement("div");
+				box.className = "grpDiv panel";
+				box.id = "panel."+grpId;
+				if(extGrpObj.expand){box.style.display = "block";}
+				else{box.style.display = "none";}
+				
+				if(settings.sortMode=="1"){
+					var fragOn = fragment.cloneNode();
+					var fragOff = fragment.cloneNode();
+					var fragNot = fragment.cloneNode();
+					for(var w = 0, q = extIDinGrp.length; w < q; w++){
+						var found = isInstalled(extList, extIDinGrp[w]);
+						if(found[0]){
+							var exInfo = found[1];
+							if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
+								searchHit++;
+								if(exInfo.enabled){makeRow(exInfo,fragOn,grpId);}
+								else{makeRow(exInfo,fragOff,grpId);}
+							}
+						}
+						else{
+							makeRow(notInstalledObj(extIDinGrp[w]),fragNot,grpId);
 						}
 					}
-					else{
-						makeRow(notInstalledObj(extIDinGrp[w]),fragNot,grpId);
+					box.appendChild(fragOn);
+					box.appendChild(fragOff);
+					box.appendChild(fragNot);
+				} else {
+					for(var w = 0, q = extIDinGrp.length; w < q; w++){
+						var found = isInstalled(extList, extIDinGrp[w]);
+						if(found[0]){
+							var exInfo = found[1];
+							if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
+								searchHit++;
+								makeRow(exInfo,box,grpId);
+							}
+						}
+						else{
+							makeRow(notInstalledObj(extIDinGrp[w]),box,grpId);
+						}
 					}
 				}
-				box.appendChild(fragOn);
-				box.appendChild(fragOff);
-				box.appendChild(fragNot);
-			}else{
-				for(var w = 0, q = extIDinGrp.length; w < q; w++){
-					var found = isInstalled(extList, extIDinGrp[w]);
-					if(found[0]){
-						exInfo = found[1];
-						if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
-						searchHit++;
-						makeRow(exInfo,box,grpId);}
-						found = true;
-					}
-					else{
-						makeRow(notInstalledObj(extIDinGrp[w]),box,grpId);
-					}
+				fragment.appendChild(box);
+				if (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings)) || searchHit!=0){
+					packInDiv(fragment, fragment2);
 				}
-			}
-			fragment.appendChild(box);
-			if (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings)) || searchHit!=0){
-				packInDiv(fragment, fragment2)
+			} catch (error) {
+				console.log("Error processing group at index " + i + ": " + error.message);
 			}
 		}
-		chkEmptyPgItm(fragment2,"grp");
-		writeToPage(fragment2,container);
+		chkEmptyPgItm(fragment2, "grp");
+		writeToPage(fragment2, container);
 	});
 }
 

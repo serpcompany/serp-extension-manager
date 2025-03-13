@@ -337,13 +337,24 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('sort1').addEventListener('click', save);
 	document.getElementById('sort2').addEventListener('click', save);
 	
-	document.getElementById('theme'+settings.theme).checked = true;
+	// Make sure the theme elements exist before setting checked
+	var themeElement = document.getElementById('theme'+settings.theme);
+	if (themeElement) {
+		themeElement.checked = true;
+	}
+	
 	document.getElementById('theme1').addEventListener('click', function(){save();location.reload();});
 	document.getElementById('theme2').addEventListener('click', function(){save();location.reload();});
 	document.getElementById('theme3').addEventListener('click', function(){save();location.reload();});
 	
-	document.getElementById('newGrpButton').addEventListener('click', function(e){e.preventDefault();showOverlay("new","");});
-	document.getElementById('bakImpButton').addEventListener('click', function(e){e.preventDefault();showOverlay("bak","");});
+	document.getElementById('newGrpButton').addEventListener('click', function(e){
+		e.preventDefault();
+		showOverlay("new","");
+	});
+	document.getElementById('bakImpButton').addEventListener('click', function(e){
+		e.preventDefault();
+		showOverlay("bak","");
+	});
 	document.getElementById('closeOver').addEventListener('click', closeOverlay);
 	document.getElementById('closeOver2').addEventListener('click', function(e) {closeOverlay(); document.getElementById('drop_zone').innerHTML = chrome.i18n.getMessage("opt_bigp_dropz");});
 	document.getElementById('savGrpButton').addEventListener('click', function(){saveExtGrp(1,true);});

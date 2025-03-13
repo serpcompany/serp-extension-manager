@@ -33,11 +33,182 @@ chrome.management.onEnabled.addListener(function(extInfo){
 });
 
 function initialize(){
+	// Initialize with default settings
 	localStorage.settings = JSON.stringify(defaultSettings);
 	localStorage.setItem("latest",JSON.stringify([]));
 	localStorage.setItem("lastDisabled",JSON.stringify([]));
 	localStorage.setItem("GRPindex",JSON.stringify([]));
 	localStorage.updatedTill = chrome.runtime.getManifest().version;
+	
+	// Ensure critical settings are set correctly
+	var settings = JSON.parse(localStorage.settings);
+	settings.showChk = true;     // Make sure checkboxes are shown
+	settings.tabPage = "1";      // Start on Extensions tab, not Groups
+	settings.grpExt = false;     // Don't group by category
+	settings.searchTop = true;   // Search bar on top
+	settings.showTab = true;     // Show tabs
+	localStorage.settings = JSON.stringify(settings);
+	
+	// Don't create default groups
+	// createDefaultGroups();
+}
+
+function createDefaultGroups() {
+	// Get all extensions
+	chrome.management.getAll(function(extensions) {
+		var GRPindex = [];
+		
+		// Create Productivity group
+		var productivityGroup = {
+			"name": "Productivity",
+			"id": "Productivity",
+			"type": "extGrp",
+			"enabled": true,
+			"items": [],
+			"expand": true
+		};
+		
+		// Create Social Media group
+		var socialGroup = {
+			"name": "Social Media",
+			"id": "Social Media",
+			"type": "extGrp",
+			"enabled": true,
+			"items": [],
+			"expand": true
+		};
+		
+		// Create Development group
+		var devGroup = {
+			"name": "Development",
+			"id": "Development",
+			"type": "extGrp",
+			"enabled": true,
+			"items": [],
+			"expand": true
+		};
+		
+		// Create a general "All Extensions" group
+		var allExtGroup = {
+			"name": "All Extensions",
+			"id": "All Extensions",
+			"type": "extGrp",
+			"enabled": true,
+			"items": [],
+			"expand": true
+		};
+		
+		// Add extensions to groups based on keywords in their names or descriptions
+		for (var i = 0; i < extensions.length; i++) {
+			var ext = extensions[i];
+			if (ext.id === selfId || ext.type !== "extension") continue; // Skip this extension and non-extensions
+			
+			// Add to All Extensions group
+			allExtGroup.items.push(ext.id);
+			
+			var name = ext.name ? ext.name.toLowerCase() : "";
+			var description = ext.description ? ext.description.toLowerCase() : "";
+			
+			// Keywords for productivity tools
+			if (name.includes("docs") || name.includes("office") || 
+				name.includes("note") || name.includes("calendar") || 
+				name.includes("task") || name.includes("work") ||
+				name.includes("productivity") || name.includes("mail") ||
+				description.includes("productivity") || name.includes("drive")) {
+				productivityGroup.items.push(ext.id);
+			}
+			// Keywords for social media tools
+			else if (name.includes("facebook") || name.includes("twitter") || 
+				name.includes("instagram") || name.includes("linkedin") || 
+				name.includes("social") || name.includes("chat") ||
+				name.includes("messenger") || name.includes("whatsapp") ||
+				description.includes("social media")) {
+				socialGroup.items.push(ext.id);
+			}
+			// Keywords for development tools
+			else if (name.includes("dev") || name.includes("code") || 
+				name.includes("web") || name.includes("git") || 
+				name.includes("debug") || name.includes("inspect") ||
+				description.includes("developer") || description.includes("coding")) {
+				devGroup.items.push(ext.id);
+			}
+		}
+		
+		// Tracking the number of groups to process
+		var groupsToProcess = 0;
+		var groupsProcessed = 0;
+		
+		// Function to call when all groups are processed
+		function finalizeGroups() {
+			// Save the index of groups
+			if (GRPindex.length > 0) {
+				localStorage.GRPindex = JSON.stringify(GRPindex);
+				
+				// Set extension to show groups tab by default
+				var settings = JSON.parse(localStorage.settings);
+				settings.tabPage = "2"; // Switch to groups tab
+				localStorage.settings = JSON.stringify(settings);
+				
+				// Create context menus for groups
+				menuCreate();
+			}
+		}
+		
+		// Function to check when all groups are processed
+		function checkAllGroupsProcessed() {
+			groupsProcessed++;
+			if (groupsProcessed >= groupsToProcess) {
+				finalizeGroups();
+			}
+		}
+		
+		// Process the All Extensions group first (this will be our fallback)
+		if (allExtGroup.items.length > 0) {
+			groupsToProcess++;
+			sortGrpItems(allExtGroup.items, function(sortedItems) {
+				allExtGroup.items = sortedItems;
+				localStorage["GRP-All Extensions"] = JSON.stringify(allExtGroup);
+				GRPindex.push("All Extensions");
+				checkAllGroupsProcessed();
+			});
+		}
+		
+		// Process other groups only if they have items
+		if (productivityGroup.items.length > 0) {
+			groupsToProcess++;
+			sortGrpItems(productivityGroup.items, function(sortedItems) {
+				productivityGroup.items = sortedItems;
+				localStorage["GRP-Productivity"] = JSON.stringify(productivityGroup);
+				GRPindex.push("Productivity");
+				checkAllGroupsProcessed();
+			});
+		}
+		
+		if (socialGroup.items.length > 0) {
+			groupsToProcess++;
+			sortGrpItems(socialGroup.items, function(sortedItems) {
+				socialGroup.items = sortedItems;
+				localStorage["GRP-Social Media"] = JSON.stringify(socialGroup);
+				GRPindex.push("Social Media");
+				checkAllGroupsProcessed();
+			});
+		}
+		
+		if (devGroup.items.length > 0) {
+			groupsToProcess++;
+			sortGrpItems(devGroup.items, function(sortedItems) {
+				devGroup.items = sortedItems;
+				localStorage["GRP-Development"] = JSON.stringify(devGroup);
+				GRPindex.push("Development");
+				checkAllGroupsProcessed();
+			});
+		}
+		
+		// If no groups were added for processing, finalize immediately
+		if (groupsToProcess === 0) {
+			finalizeGroups();
+		}
+	});
 }
 
 function bgOnLoad(){
@@ -65,11 +236,32 @@ function settingsUpdate(){
 		}
 		
 		//for accordion, 1.4.8
-		var GRPindex = JSON.parse(localStorage.GRPindex);
+		var GRPindex = [];
+		try {
+			if (localStorage.GRPindex) {
+				GRPindex = JSON.parse(localStorage.GRPindex);
+			} else {
+				// Initialize if needed
+				localStorage.setItem("GRPindex", JSON.stringify([]));
+			}
+		} catch (e) {
+			console.log("Error parsing GRPindex for accordion: " + e.message);
+			// Reset with empty array if corrupted
+			localStorage.setItem("GRPindex", JSON.stringify([]));
+		}
+		
 		for(var i=0, j=GRPindex.length; i<j; i++) {
-		  var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-		  extGrpObj.expand = true;
-		  localStorage["GRP-"+GRPindex[i]] = JSON.stringify(extGrpObj);
+			try {
+				var grpKey = "GRP-"+GRPindex[i];
+				if (!localStorage[grpKey]) {
+					continue; // Skip if group data doesn't exist
+				}
+				var extGrpObj = JSON.parse(localStorage[grpKey]);
+				extGrpObj.expand = true;
+				localStorage[grpKey] = JSON.stringify(extGrpObj);
+			} catch (e) {
+				console.log("Error processing group for accordion: " + e.message);
+			}
 		}
 		
 		duplRecents(); //remove duplicates in recents
@@ -89,18 +281,43 @@ function duplRecents(){
 }
 
 function indexGrps(){
-	var index = JSON.parse(localStorage.GRPindex);
+	var index = [];
+	try {
+		if (localStorage.GRPindex) {
+			index = JSON.parse(localStorage.GRPindex);
+		}
+	} catch (e) {
+		console.log("Error parsing GRPindex in indexGrps: " + e.message);
+	}
+	
 	for (var i = 0, len = localStorage.length; i < len; i++) {
-		if (localStorage.key(i).substring(0, 4) == "GRP-") {
-			var extGrpObj = JSON.parse(localStorage[localStorage.key(i)]);
-			index.push(extGrpObj.name);
+		try {
+			if (localStorage.key(i) && localStorage.key(i).substring(0, 4) == "GRP-") {
+				var extGrpObj = JSON.parse(localStorage[localStorage.key(i)]);
+				if (extGrpObj && extGrpObj.name) {
+					index.push(extGrpObj.name);
+				}
+			}
+		} catch (e) {
+			console.log("Error processing group in indexGrps: " + e.message);
 		}
 	}
-	localStorage.setItem("GRPindex",JSON.stringify(index)); 
+	localStorage.setItem("GRPindex", JSON.stringify(index)); 
 }
 
 function removeSelfFromGrps(){
-	var GRPindex = JSON.parse(localStorage.GRPindex);
+	var GRPindex = [];
+	try {
+		if (localStorage.GRPindex) {
+			GRPindex = JSON.parse(localStorage.GRPindex);
+		} else {
+			return; // Nothing to do if no groups
+		}
+	} catch (e) {
+		console.log("Error parsing GRPindex in removeSelfFromGrps: " + e.message);
+		return;
+	}
+	
 	for (var i = 0, len = GRPindex.length; i < len; i++){
 		var extGrpObj = JSON.parse(localStorage["GRP-" + GRPindex[i]]);
 		localStorage["GRP-"+GRPindex[i]] = JSON.stringify(spliceSelf(extGrpObj));
@@ -108,28 +325,48 @@ function removeSelfFromGrps(){
 }
 
 function grpWeeder(extId){
-	var GRPindex = JSON.parse(localStorage.GRPindex);
-	for (var i = 0, len = GRPindex.length; i < len; i++) {
-		var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-		var grpItems = extGrpObj.items;
-
-		var toResave = false;
-		
-		var index = grpItems.indexOf(extId);
-		if (index > -1) {
-			toResave = true;
-			grpItems.splice(index, 1);
+	var GRPindex = [];
+	try {
+		if (localStorage.GRPindex) {
+			GRPindex = JSON.parse(localStorage.GRPindex);
+		} else {
+			return; // Nothing to do if no groups
 		}
-		
-		if(toResave){
-			var grpName = extGrpObj.name;
-			if(grpItems.length!=0){
-				var grpObj = {"name":grpName,"id":grpName,"type":"extGrp","enabled":extGrpObj.enabled,"items":grpItems};
-				localStorage["GRP-"+grpName] = JSON.stringify(grpObj);
-			}else{
-				removeGrp(grpName);
-				--i; --len;
+	} catch (e) {
+		console.log("Error parsing GRPindex in grpWeeder: " + e.message);
+		return;
+	}
+	
+	for (var i = 0, len = GRPindex.length; i < len; i++) {
+		try {
+			var grpKey = "GRP-"+GRPindex[i];
+			if (!localStorage[grpKey]) {
+				continue; // Skip if group data doesn't exist
 			}
+			
+			var extGrpObj = JSON.parse(localStorage[grpKey]);
+			var grpItems = extGrpObj.items || [];
+
+			var toResave = false;
+			
+			var index = grpItems.indexOf(extId);
+			if (index > -1) {
+				toResave = true;
+				grpItems.splice(index, 1);
+			}
+			
+			if(toResave){
+				var grpName = extGrpObj.name;
+				if(grpItems.length!=0){
+					var grpObj = {"name":grpName,"id":grpName,"type":"extGrp","enabled":extGrpObj.enabled,"items":grpItems};
+					localStorage["GRP-"+grpName] = JSON.stringify(grpObj);
+				}else{
+					removeGrp(grpName);
+					--i; --len;
+				}
+			}
+		} catch (e) {
+			console.log("Error processing group in grpWeeder: " + e.message);
 		}
 	}
 }

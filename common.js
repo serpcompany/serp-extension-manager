@@ -1,5 +1,5 @@
 var defaultSettings = {
-	"grpExt" : true,
+	"grpExt" : false,
 	"sortMode" : "1",
 	"showChk" : true,
 	"showSet" : true,
@@ -21,7 +21,7 @@ var defaultSettings = {
 	"advGrpVw" : true,
 	"rightClickDel" : true,
 	"showLat" : false,
-	"searchTop" : false,
+	"searchTop" : true,
 	"showLD" : false,
 	"tabTop" : false,
 	"onlyOne" : false,
@@ -196,33 +196,44 @@ function enableGrp(grpName, importing, force, context) {
 	if(force===undefined) force = false;
 	if(context===undefined) context = false;
 	chrome.management.getAll(function (extList) {
-		var settings = JSON.parse(localStorage["settings"]);
-		if(!settings.onlyOne||force){
-			var extGrpObj = JSON.parse(localStorage["GRP-" + grpName]);
-			var grpState = extGrpObj.enabled;
-			var grpItems = extGrpObj.items;
-
-			if (!importing) {
-				grpState = !grpState;
+		try {
+			var settings = localStorage.settings ? JSON.parse(localStorage.settings) : defaultSettings;
+			var grpKey = "GRP-" + grpName;
+			
+			if (!localStorage[grpKey]) {
+				console.log("Missing group data for: " + grpName);
+				return;
 			}
+			
+			var extGrpObj = JSON.parse(localStorage[grpKey]);
+			if(!settings.onlyOne||force){
+				var grpState = extGrpObj.enabled;
+				var grpItems = extGrpObj.items;
 
-			for (var i = 0, s = grpItems.length; i < s; i++) {
-				if (grpItems[i] != selfId) {
-					var found = isInstalled(extList, grpItems[i]);
-					if(found[0]){
-						chrome.management.setEnabled(grpItems[i], grpState);
-						if (!importing && settings.tabPage == 2&&!context) {
-							if (settings.advGrpVw)
-								enableExt(grpItems[i], false);
-							else
-								setGrpState();
-						}
-						if(context) setGrpStateOnly();
-					}
+				if (!importing) {
+					grpState = !grpState;
 				}
-			}	
-		}		
-		else disableAllExcept(grpName,context);
+
+				for (var i = 0, s = grpItems.length; i < s; i++) {
+					if (grpItems[i] != selfId) {
+						var found = isInstalled(extList, grpItems[i]);
+						if(found[0]){
+							chrome.management.setEnabled(grpItems[i], grpState);
+							if (!importing && settings.tabPage == 2&&!context) {
+								if (settings.advGrpVw)
+									enableExt(grpItems[i], false);
+								else
+									setGrpState();
+							}
+							if(context) setGrpStateOnly();
+						}
+					}
+				}	
+			}		
+			else disableAllExcept(grpName,context);
+		} catch (error) {
+			console.log("Error in enableGrp for " + grpName + ": " + error.message);
+		}
 	});
 }
 
@@ -231,81 +242,175 @@ function disableGrp(grpName, context) {
 	// console.log("DISABLE GROUP");
 	if(context===undefined) context = false;
 	chrome.management.getAll(function (extList) {
-		var settings = JSON.parse(localStorage["settings"]);
-		var extGrpObj = JSON.parse(localStorage["GRP-" + grpName]);
-		var grpItems = extGrpObj.items;
+		try {
+			var settings = localStorage.settings ? JSON.parse(localStorage.settings) : defaultSettings;
+			var grpKey = "GRP-" + grpName;
+			
+			if (!localStorage[grpKey]) {
+				console.log("Missing group data for: " + grpName);
+				return;
+			}
+			
+			var extGrpObj = JSON.parse(localStorage[grpKey]);
+			var grpItems = extGrpObj.items;
 
-		for (var i = 0, s = grpItems.length; i < s; i++) {
-			if (grpItems[i] != selfId) {
-				var found = isInstalled(extList, grpItems[i]);
-				if(found[0]){
-					chrome.management.setEnabled(grpItems[i], false);
-					if (settings.tabPage == 2&&!context) {
-						if (settings.advGrpVw)
-							enableExt(grpItems[i], false);
-						else
-							setGrpState();
+			for (var i = 0, s = grpItems.length; i < s; i++) {
+				if (grpItems[i] != selfId) {
+					var found = isInstalled(extList, grpItems[i]);
+					if(found[0]){
+						chrome.management.setEnabled(grpItems[i], false);
+						if (settings.tabPage == 2&&!context) {
+							if (settings.advGrpVw)
+								enableExt(grpItems[i], false);
+							else
+								setGrpState();
+						}
+						if(context) setGrpStateOnly();
 					}
-					if(context) setGrpStateOnly();
 				}
 			}
+		} catch (error) {
+			console.log("Error in disableGrp for " + grpName + ": " + error.message);
 		}
 	});
 }
 function disableAllExcept(grpName, context){
-	var GRPindex = JSON.parse(localStorage.GRPindex);
-	for (var i = 0, k = GRPindex.length; i < k; i++){
-		disableGrp(GRPindex[i],context);
+	// Safely parse GRPindex
+	var GRPindex = [];
+	try {
+		if (localStorage.GRPindex) {
+			GRPindex = JSON.parse(localStorage.GRPindex);
+		}
+	} catch (e) {
+		console.log("Error parsing GRPindex in disableAllExcept: " + e.message);
+		return; // Early return if we can't parse groups
 	}
-	enableGrp(grpName,false,true,context);
+	
+	if (!Array.isArray(GRPindex) || GRPindex.length === 0) {
+		return;
+	}
+	
+	for (var i = 0, k = GRPindex.length; i < k; i++){
+		disableGrp(GRPindex[i], context);
+	}
+	enableGrp(grpName, false, true, context);
 }
 
 //grp state by member state
 function setGrpState() {
 // console.log("CHK MEMBERS");
 	chrome.management.getAll(function(extList) {
-		var settings = JSON.parse(localStorage["settings"]);
-		var GRPindex = JSON.parse(localStorage.GRPindex);
+		var settings = localStorage.settings ? JSON.parse(localStorage.settings) : defaultSettings;
+		var GRPindex = [];
+		
+		try {
+			GRPindex = JSON.parse(localStorage.GRPindex || '[]');
+		} catch (e) {
+			console.log("Error parsing GRPindex: " + e.message);
+			GRPindex = [];
+		}
+		
+		if (GRPindex.length === 0) return; // No groups to update
+		
 		for (var i = 0, k = GRPindex.length; i < k; i++){
-			
-			var grp = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-			var counts = getEnabledCount(grp, extList);
-			// console.log("Set "+GRPindex[i]+": "+counts[0]+"/"+counts[1]);
-			
-			// chk before and after if got change than write?
-			var chkbox = document.getElementById("ch."+grp.id);
-			var name = document.getElementById("gp."+grp.id);
-			if(counts[0]!=counts[1]||counts[1]==0) {
-				grp.enabled = false; 
-				if(counts[0]==0) {chkbox.checked = false; }
-				else if(counts[1]==0) {chkbox.disabled = true; }
-				else {chkbox.className = "cellEnabler enabler.grp fade"; chkbox.checked = true; }
-				name.className = "cellName header disabled";
+			try {
+				var grpKey = "GRP-"+GRPindex[i];
+				if (!localStorage[grpKey]) {
+					console.log("Missing group data for: " + GRPindex[i]);
+					continue;
+				}
+				var grp = JSON.parse(localStorage[grpKey]);
+				var counts = getEnabledCount(grp, extList);
+				// console.log("Set "+GRPindex[i]+": "+counts[0]+"/"+counts[1]);
+				
+				// chk before and after if got change than write?
+				var chkbox = document.getElementById("ch."+grp.id);
+				var name = document.getElementById("gp."+grp.id);
+				if(counts[0]!=counts[1]||counts[1]==0) {
+					grp.enabled = false; 
+					if(chkbox && counts[0]==0) {chkbox.checked = false; }
+					else if(chkbox && counts[1]==0) {chkbox.disabled = true; }
+					else if(chkbox) {chkbox.className = "cellEnabler enabler.grp fade"; chkbox.checked = true; }
+					if(name) name.className = "cellName header disabled";
+				}
+				else {
+					grp.enabled = true;
+					if(chkbox) chkbox.checked = true;
+					if(name) name.className = "cellName header";
+					if(chkbox) chkbox.className = "cellEnabler enabler.grp";
+				}
+				localStorage.setItem(grpKey, JSON.stringify(grp));
+				if (!settings.noContext) {
+					try {
+						// Check if the menu item exists by querying it first
+						chrome.contextMenus.update(grp.id, {"checked": grp.enabled}, function() {
+							if (chrome.runtime.lastError) {
+								// Menu doesn't exist, recreate it
+								try {
+									chrome.contextMenus.create({
+										"title": grp.name,
+										"type": "checkbox",
+										"contexts": ['page', 'action'],
+										"id": grp.id,
+										"checked": grp.enabled
+									});
+								} catch (err) {
+									// Silently ignore errors when creating menu items
+								}
+							}
+						});
+					} catch (e) {
+						console.log("Context menu error for " + grp.id + ": " + e.message);
+					}
+				}
+			} catch (error) {
+				console.log("Error processing group at index " + i + ": " + error.message);
 			}
-			else {
-				grp.enabled = true;
-				chkbox.checked = true;
-				name.className = "cellName header";
-				chkbox.className = "cellEnabler enabler.grp";
-			}
-			localStorage.setItem("GRP-"+GRPindex[i],JSON.stringify(grp));
-			if (!settings.noContext) chrome.contextMenus.update(grp.id,{"checked": grp.enabled});
 		}	
 	});
 }
 
 function setGrpStateOnly() {
 	chrome.management.getAll(function(extList) {
-		var GRPindex = JSON.parse(localStorage.GRPindex);
+		var GRPindex = [];
+		
+		try {
+			GRPindex = JSON.parse(localStorage.GRPindex || '[]');
+		} catch (e) {
+			console.log("Error parsing GRPindex: " + e.message);
+			GRPindex = [];
+		}
+		
+		if (GRPindex.length === 0) return; // No groups to update
+		
 		for (var i = 0, k = GRPindex.length; i < k; i++){
-			var grp = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-			var counts = getEnabledCount(grp, extList);
-			
-			if(counts[0]!=counts[1]||counts[1]==0) {grp.enabled = false;}
-			else {grp.enabled = true;}
-			
-			localStorage.setItem("GRP-"+GRPindex[i],JSON.stringify(grp));
-			chrome.contextMenus.update(grp.id,{"checked": grp.enabled});
+			try {
+				var grpKey = "GRP-"+GRPindex[i];
+				if (!localStorage[grpKey]) {
+					console.log("Missing group data for: " + GRPindex[i]);
+					continue;
+				}
+				var grp = JSON.parse(localStorage[grpKey]);
+				var counts = getEnabledCount(grp, extList);
+				
+				if(counts[0]!=counts[1]||counts[1]==0) {grp.enabled = false;}
+				else {grp.enabled = true;}
+				
+				localStorage.setItem(grpKey, JSON.stringify(grp));
+				try {
+					// Check if the menu item exists by querying it first
+					chrome.contextMenus.update(grp.id, {"checked": grp.enabled}, function() {
+						if (chrome.runtime.lastError) {
+							// Don't need to recreate the menu item here
+							console.log("Context menu item doesn't exist, skipping update");
+						}
+					});
+				} catch (e) {
+					console.log("Context menu error in setGrpStateOnly for " + grp.id + ": " + e.message);
+				}
+			} catch (error) {
+				console.log("Error processing group at index " + i + ": " + error.message);
+			}
 		}	
 	});
 }
@@ -327,7 +432,22 @@ function saveExtGrp(mode,fromOptions,popupNG,popParam) {
 	var nameBox = document.getElementById('grpName');
 	var nameBoxVal = nameBox.value;
 	var oriGrpName = document.getElementById('savGrpButton').name;
-	var GRPindex = JSON.parse(localStorage.GRPindex);
+	
+	// Safely parse GRPindex
+	var GRPindex = [];
+	try {
+		if (localStorage.GRPindex) {
+			GRPindex = JSON.parse(localStorage.GRPindex);
+		} else {
+			// Initialize if it doesn't exist
+			localStorage.setItem("GRPindex", JSON.stringify([]));
+		}
+	} catch (e) {
+		console.log("Error parsing GRPindex in saveExtGrp: " + e.message);
+		// Reinitialize with empty array if corrupted
+		localStorage.setItem("GRPindex", JSON.stringify([]));
+	}
+	
 	var doSave = true;
 	var state = true;
 	
@@ -378,7 +498,19 @@ function saveExtGrp(mode,fromOptions,popupNG,popParam) {
 				}
 				
 				var grpObj = {"name":nameBoxVal,"id":nameBoxVal,"type":"extGrp","enabled":state,"items":selectedItems,"expand":true};
-				addGrp(grpObj,JSON.parse(localStorage.GRPindex),fromOptions,mode,oriGrpName);
+				
+				// Get fresh GRPindex to avoid stale data
+				var currentGRPindex = [];
+				try {
+					if (localStorage.GRPindex) {
+						currentGRPindex = JSON.parse(localStorage.GRPindex);
+					}
+				} catch (e) {
+					console.log("Error parsing current GRPindex: " + e.message);
+					currentGRPindex = [];
+				}
+				
+				addGrp(grpObj, currentGRPindex, fromOptions, mode, oriGrpName);
 				
 				closeOverlay();
 			}
@@ -390,7 +522,19 @@ function saveExtGrp(mode,fromOptions,popupNG,popParam) {
 					selectedItems.push(popParam);
 
 					var grpObj = {"name":nameBoxVal,"id":nameBoxVal,"type":"extGrp","enabled":state,"items":selectedItems,"expand":true};
-					addGrp(grpObj,JSON.parse(localStorage.GRPindex),fromOptions,mode,oriGrpName);
+					
+					// Get fresh GRPindex to avoid stale data
+					var currentGRPindex = [];
+					try {
+						if (localStorage.GRPindex) {
+							currentGRPindex = JSON.parse(localStorage.GRPindex);
+						}
+					} catch (e) {
+						console.log("Error parsing current GRPindex: " + e.message);
+						currentGRPindex = [];
+					}
+					
+					addGrp(grpObj, currentGRPindex, fromOptions, mode, oriGrpName);
 					
 					closeOverlay();
 					location.reload(true);
@@ -422,12 +566,34 @@ function addGrp(grpObj,GRPindex,fromOptions,mode,oldName){
 	})(GRPindex);
 }
 
-function removeGrp(grpId,editOnly){
-	var GRPindex = JSON.parse(localStorage.GRPindex);
+function removeGrp(grpId, editOnly) {
+	// Safely parse GRPindex
+	var GRPindex = [];
+	try {
+		if (localStorage.GRPindex) {
+			GRPindex = JSON.parse(localStorage.GRPindex);
+		} else {
+			// Initialize if it doesn't exist
+			localStorage.setItem("GRPindex", JSON.stringify([]));
+			return; // Nothing to remove
+		}
+	} catch (e) {
+		console.log("Error parsing GRPindex in removeGrp: " + e.message);
+		// Reinitialize with empty array if corrupted
+		localStorage.setItem("GRPindex", JSON.stringify([]));
+		return; // Can't properly remove if corrupted
+	}
+	
+	// Remove group data
 	delete localStorage["GRP-"+grpId];
-	if(editOnly!=1){
-		GRPindex.splice(GRPindex.indexOf(grpId),1);
-		localStorage.GRPindex = JSON.stringify(GRPindex);
+	
+	// Update index if not in edit mode
+	if(editOnly != 1) {
+		var index = GRPindex.indexOf(grpId);
+		if (index > -1) {
+			GRPindex.splice(index, 1);
+			localStorage.GRPindex = JSON.stringify(GRPindex);
+		}
 	}
 }
 
@@ -456,17 +622,44 @@ function sortGrpItems(itmArr,callback){
 function isInGrp(extId) {
 // console.log("CHK IF IN GRP "+localStorage.length);
 	var grpList = chrome.i18n.getMessage("opt_egrp_opt7");
-	var GRPindex = JSON.parse(localStorage.GRPindex);
-	for(var i=0,m=GRPindex.length; i<m; i++) {
-		var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-		var grpName = extGrpObj.name;
-		var grpItems = extGrpObj.items;
-		// console.log("- checking "+grpName+", "+i);
-		for (var k = 0, s = grpItems.length; k < s; k++) {
-			if(grpItems[k]==extId){
-			// console.log("-- hit!");
-				grpList+="\n- "+grpName;
+	
+	// Safely parse GRPindex, return early if not available
+	var GRPindex = [];
+	try {
+		if (localStorage.GRPindex) {
+			GRPindex = JSON.parse(localStorage.GRPindex);
+		}
+	} catch (e) {
+		console.log("Error parsing GRPindex in isInGrp: " + e.message);
+		return grpList; // Return just the base message if we can't parse the groups
+	}
+	
+	// Proceed only if we have valid groups
+	if (!Array.isArray(GRPindex) || GRPindex.length === 0) {
+		return grpList;
+	}
+	
+	// Check each group
+	for(var i=0, m=GRPindex.length; i<m; i++) {
+		try {
+			var grpKey = "GRP-"+GRPindex[i];
+			if (!localStorage[grpKey]) {
+				continue; // Skip if group data doesn't exist
 			}
+			
+			var extGrpObj = JSON.parse(localStorage[grpKey]);
+			var grpName = extGrpObj.name;
+			var grpItems = extGrpObj.items;
+			
+			// console.log("- checking "+grpName+", "+i);
+			for (var k = 0, s = grpItems.length; k < s; k++) {
+				if(grpItems[k]==extId){
+				// console.log("-- hit!");
+					grpList+="\n- "+grpName;
+				}
+			}
+		} catch (error) {
+			console.log("Error processing group at index " + i + ": " + error.message);
 		}
 	}
 	// console.log("!! return: "+grpList);
@@ -476,19 +669,34 @@ function isInGrp(extId) {
 function menuCreate() {
 	// console.log("REMAKE R_MENU");
 	var settings = JSON.parse(localStorage["settings"]);
-	var GRPindex = JSON.parse(localStorage.GRPindex);
+	var GRPindex = [];
+	
+	try {
+		GRPindex = JSON.parse(localStorage.GRPindex || '[]');
+	} catch (e) {
+		console.log("Error parsing GRPindex: " + e.message);
+		GRPindex = [];
+	}
+	
 	chrome.contextMenus.removeAll();
 
-	if (!settings.noContext) {
+	if (!settings.noContext && GRPindex.length > 0) {
 		for (var i = 0, k = GRPindex.length; i < k; i++) {
-			var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-			chrome.contextMenus.create({
-				"title" : extGrpObj.name,
-				"type" : "checkbox",
-				"contexts" : ['page', 'action'],
-				"id" : extGrpObj.id,
-				"checked" : extGrpObj.enabled
-			});
+			try {
+				var grpKey = "GRP-"+GRPindex[i];
+				if (localStorage[grpKey]) {
+					var extGrpObj = JSON.parse(localStorage[grpKey]);
+					chrome.contextMenus.create({
+						"title" : extGrpObj.name,
+						"type" : "checkbox",
+						"contexts" : ['page', 'action'],
+						"id" : extGrpObj.id,
+						"checked" : extGrpObj.enabled
+					});
+				}
+			} catch (e) {
+				console.log("Error creating menu item for " + GRPindex[i] + ": " + e.message);
+			}
 		}
 	}
 }
@@ -553,4 +761,39 @@ function weedQ(qName,extID){
 
 function notInstalledObj(extId){
 	return {id:extId,type:"not_installed",name:chrome.i18n.getMessage("det_notInst"),homepageUrl:storeUrl(extId)};
+}
+
+function notGRPexts() {
+	var extsList = getExtensionIds();
+	var grpExts = [];
+	
+	// Safely parse GRPindex
+	var GRPindex = [];
+	try {
+		if (localStorage.GRPindex) {
+			GRPindex = JSON.parse(localStorage.GRPindex);
+		}
+	} catch (e) {
+		console.log("Error parsing GRPindex in notGRPexts: " + e.message);
+	}
+	
+	// Build list of extensions in groups
+	for (var i=0; i<GRPindex.length; i++) {
+		try {
+			var grpJson = localStorage["GRP-"+GRPindex[i]];
+			if (grpJson) {
+				var grp = JSON.parse(grpJson);
+				if (grp && grp.exts) {
+					grpExts = grpExts.concat(grp.exts);
+				}
+			}
+		} catch (e) {
+			console.log("Error parsing group data in notGRPexts for group " + GRPindex[i] + ": " + e.message);
+		}
+	}
+	
+	// Filter out extensions that are in groups
+	return extsList.filter(function(val) {
+		return (grpExts.indexOf(val) === -1);
+	});
 }
