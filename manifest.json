@@ -18,8 +18,7 @@
       "16": "icon-16.png",
       "48": "icon-48.png"
    },
-   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDPQgecbnVtVHJLrXuqd2mtuqVKziRYN2swso4WDgRAUaU/8ezLyJOK1zfnYyybCkddhZugg97/7+roiddGS3eSmFkLVyi39RnFtmfB1wI6Ji1CjO9eXe7KGhkGkzN/Zc0+KPN6mMqXtaJENVHrKAFMXf9Y7GsLUepDzlM7TWzrrQIDAQAB",
-   "manifest_version": 1,
+   "manifest_version": 2,
    "name": "SERP Extension Manager",
    "options_page": "options.html",
    "permissions": [ "management", "contextMenus" ],
