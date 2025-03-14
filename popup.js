@@ -1,8 +1,18 @@
 // Initialize default settings if not present
-var settings = localStorage.settings ? JSON.parse(localStorage.settings) : {};
-var GRPindex = localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : [];
+var settings = {};
+var GRPindex = [];
 var filterTimeOut, filterStrings, reloadTimeOut;
 var popHeight, popWidth;
+
+// Load settings from chrome.storage.local or localStorage as fallback
+chrome.storage.local.get(['settings', 'GRPindex'], function(result) {
+	// Use chrome.storage.local values if available, otherwise fall back to localStorage
+	settings = result.settings || (localStorage.settings ? JSON.parse(localStorage.settings) : {});
+	GRPindex = result.GRPindex || (localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : []);
+	
+	// Initialize UI with the loaded settings
+	initializeUI();
+});
 
 chrome.management.onUninstalled.addListener(function(extId){switchTab(settings.tabPage,true);});
 
@@ -143,22 +153,37 @@ function extCount() {
 function extGrpCount() {
 	if(settings.showCount){
 		chrome.management.getAll(function(extList) {
-			var GRPindex = JSON.parse(localStorage.GRPindex);
-			for(var i=0, j=GRPindex.length; i<j; i++) {
-				var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-				var grpId = extGrpObj.name;
-				var extIDinGrp = extGrpObj.items;
-				var enabledInGrp = 0;
+			// Use chrome.storage.local for GRPindex
+			chrome.storage.local.get(['GRPindex'], function(result) {
+				var GRPindex = result.GRPindex || (localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : []);
 				
-				for(var w = 0, q = extIDinGrp.length; w < q; w++){
-					var found = isInstalled(extList, extIDinGrp[w]);
-					if(found[0]){
-						exInfo = found[1];
-						if(exInfo.enabled){enabledInGrp++;}
-					}
+				for(var i=0, j=GRPindex.length; i<j; i++) {
+					// Use chrome.storage.local for each group
+					(function(groupName) {
+						chrome.storage.local.get(['GRP-'+groupName], function(result) {
+							var extGrpObj = result['GRP-'+groupName] || (localStorage['GRP-'+groupName] ? JSON.parse(localStorage['GRP-'+groupName]) : null);
+							if (!extGrpObj) return;
+							
+							var grpId = extGrpObj.name;
+							var extIDinGrp = extGrpObj.items;
+							var enabledInGrp = 0;
+							
+							for(var w = 0, q = extIDinGrp.length; w < q; w++){
+								var found = isInstalled(extList, extIDinGrp[w]);
+								if(found[0]){
+									exInfo = found[1];
+									if(exInfo.enabled){enabledInGrp++;}
+								}
+							}
+							
+							var countElement = document.getElementById('ct.'+grpId);
+							if (countElement) {
+								countElement.innerHTML = enabledInGrp+"/"+extIDinGrp.length;
+							}
+						});
+					})(GRPindex[i]);
 				}
-				document.getElementById('ct.'+grpId).innerHTML = enabledInGrp+"/"+extIDinGrp.length;
-			}
+			});
 		});
 	}
 }
@@ -171,29 +196,34 @@ function allDisable(stateStr){
 	for(var i = 0, m = itemList.length; i < m; i++){
 		if(itemList[i].checked){
 			var extID = (itemList[i].id.split("."))[1];				
-			enableExt(extID,true);
+			enableExt(extID, true);
 			selectedItems.push(extID);
 		}
 	}
 	
-	if(!selectedItems==""){
+	if(selectedItems.length > 0){
+		// Save to both localStorage and chrome.storage.local
 		localStorage[stateStr] = JSON.stringify(selectedItems);
+		chrome.storage.local.set({[stateStr]: selectedItems});
 	}
 }
 
 function allEnable(stateStr){
-	//Read state
-	var grpItems = JSON.parse(localStorage[stateStr]);
-	
-	//Enable, w/check if all disabled
-	if(grpItems[0]!=""){
-		for (var i = 0, s = grpItems.length; i < s; i++) {
-			enableExt(grpItems[i],true);
+	// Get state from chrome.storage.local with fallback to localStorage
+	chrome.storage.local.get([stateStr], function(result) {
+		var grpItems = result[stateStr] || (localStorage[stateStr] ? JSON.parse(localStorage[stateStr]) : []);
+		
+		//Enable, w/check if all disabled
+		if(grpItems.length > 0){
+			for (var i = 0, s = grpItems.length; i < s; i++) {
+				enableExt(grpItems[i], true);
+			}
 		}
-	}
-	
-	//Delete state
-	localStorage.removeItem(stateStr);
+		
+		//Delete state from both storages
+		localStorage.removeItem(stateStr);
+		chrome.storage.local.remove(stateStr);
+	});
 }
 
 function disableAllHandler(stateStr){
@@ -201,27 +231,35 @@ function disableAllHandler(stateStr){
 	var btn = document.getElementById('disableAll');
 	
 	//if no state set btn title and text, vice versa
-	if (localStorage.getItem(stateStr) === null) {
-		allDisable(stateStr);
-		btn.title = chrome.i18n.getMessage("popup_btn_enable_tooltip");
-		btn.innerText = chrome.i18n.getMessage("popup_btn_enable_text");
-	}else{
-		allEnable(stateStr);
-		btn.title = chrome.i18n.getMessage("popup_btn_disable_tooltip");
-		btn.innerText = chrome.i18n.getMessage("popup_btn_disable_text");
-	}
+	chrome.storage.local.get([stateStr], function(result) {
+		var hasState = result[stateStr] || localStorage.getItem(stateStr);
+		
+		if (!hasState) {
+			allDisable(stateStr);
+			btn.title = chrome.i18n.getMessage("popup_btn_enable_tooltip");
+			btn.innerText = chrome.i18n.getMessage("popup_btn_enable_text");
+		} else {
+			allEnable(stateStr);
+			btn.title = chrome.i18n.getMessage("popup_btn_disable_tooltip");
+			btn.innerText = chrome.i18n.getMessage("popup_btn_disable_text");
+		}
+	});
 }
 
 function btnSetter(stateStr){
 	var btn = document.getElementById('disableAll');
 
-	if (localStorage.getItem(stateStr) === null) {
-		btn.title = chrome.i18n.getMessage("popup_btn_disable_tooltip");
-		btn.innerText = chrome.i18n.getMessage("popup_btn_disable_text");
-	}else{
-		btn.title = chrome.i18n.getMessage("popup_btn_enable_tooltip");
-		btn.innerText = chrome.i18n.getMessage("popup_btn_enable_text");
-	}
+	chrome.storage.local.get([stateStr], function(result) {
+		var hasState = result[stateStr] || localStorage.getItem(stateStr);
+		
+		if (!hasState) {
+			btn.title = chrome.i18n.getMessage("popup_btn_disable_tooltip");
+			btn.innerText = chrome.i18n.getMessage("popup_btn_disable_text");
+		} else {
+			btn.title = chrome.i18n.getMessage("popup_btn_enable_tooltip");
+			btn.innerText = chrome.i18n.getMessage("popup_btn_enable_text");
+		}
+	});
 }
 
 function makeRow(extInfo,fragment,grp) {
@@ -458,9 +496,16 @@ function writeToPage(fragment,canvas){
 }
 
 function saveExpand(state,grpID){
-	var extGrpObj = JSON.parse(localStorage["GRP-"+grpID]);
-	extGrpObj.expand = state;
-	localStorage["GRP-"+grpID] = JSON.stringify(extGrpObj);
+	chrome.storage.local.get(['GRP-'+grpID], function(result) {
+		var extGrpObj = result['GRP-'+grpID] || (localStorage['GRP-'+grpID] ? JSON.parse(localStorage['GRP-'+grpID]) : null);
+		if (!extGrpObj) return;
+		
+		extGrpObj.expand = state;
+		
+		// Save to both localStorage and chrome.storage.local
+		localStorage['GRP-'+grpID] = JSON.stringify(extGrpObj);
+		chrome.storage.local.set({['GRP-'+grpID]: extGrpObj});
+	});
 }
 
 function makeExtRows(extList) {
@@ -508,79 +553,131 @@ function makeExtCatRows(extList) {
 }
 
 function makeGrpRows(container) {
-	var fragment = document.createDocumentFragment();
-	for(var i=0, j=GRPindex.length; i<j; i++) {
-		var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-		if (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings))){
-			makeRow(extGrpObj,fragment);
+	chrome.storage.local.get(['GRPindex'], function(result) {
+		var GRPindex = result.GRPindex || (localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : []);
+		var fragment = document.createDocumentFragment();
+		var groupsProcessed = 0;
+		
+		if (GRPindex.length === 0) {
+			chkEmptyPgItm(fragment, "grp");
+			writeToPage(fragment, container);
+			return;
 		}
-	}
-	chkEmptyPgItm(fragment,"grp");
-	writeToPage(fragment,container);
+		
+		for(var i=0, j=GRPindex.length; i<j; i++) {
+			(function(index) {
+				chrome.storage.local.get(['GRP-'+GRPindex[index]], function(result) {
+					var extGrpObj = result['GRP-'+GRPindex[index]] || 
+						(localStorage['GRP-'+GRPindex[index]] ? JSON.parse(localStorage['GRP-'+GRPindex[index]]) : null);
+					
+					if (extGrpObj && (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings)))) {
+						makeRow(extGrpObj, fragment);
+					}
+					
+					groupsProcessed++;
+					
+					// When all groups are processed, update the page
+					if (groupsProcessed === GRPindex.length) {
+						chkEmptyPgItm(fragment, "grp");
+						writeToPage(fragment, container);
+					}
+				});
+			})(i);
+		}
+	});
 }
 
 function makeAdvGrps(container) {
 	chrome.management.getAll(function(extList) {
-		var GRPindex = JSON.parse(localStorage.GRPindex);
-		var fragment2 =  document.createDocumentFragment();
-		for(var i=0, j=GRPindex.length; i<j; i++) {
-			var fragment = document.createDocumentFragment();
-			var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-			var grpId = extGrpObj.name;
-			var extIDinGrp = extGrpObj.items;
-			var searchHit = 0;
-		
-			makeRow(extGrpObj,fragment,grpId);
+		chrome.storage.local.get(['GRPindex'], function(result) {
+			var GRPindex = result.GRPindex || (localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : []);
+			var fragment2 = document.createDocumentFragment();
+			var groupsProcessed = 0;
 			
-			var box = document.createElement("div");
-			box.className = "grpDiv panel";
-			box.id = "panel."+grpId;
-			if(extGrpObj.expand){box.style.display = "block";}
-			else{box.style.display = "none";}
+			if (GRPindex.length === 0) {
+				chkEmptyPgItm(fragment2, "grp");
+				writeToPage(fragment2, container);
+				return;
+			}
 			
-			if(settings.sortMode=="1"){
-				var fragOn =  fragment.cloneNode();
-				var fragOff =  fragment.cloneNode();
-				var fragNot =  fragment.cloneNode();
-				for(var w = 0, q = extIDinGrp.length; w < q; w++){
-					var found = isInstalled(extList, extIDinGrp[w]);
-					if(found[0]){
-						exInfo = found[1];
-						if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
-						searchHit++;
-						if(exInfo.enabled){makeRow(exInfo,fragOn,grpId);}
-						else{makeRow(exInfo,fragOff,grpId);}
+			for(var i=0, j=GRPindex.length; i<j; i++) {
+				(function(index) {
+					chrome.storage.local.get(['GRP-'+GRPindex[index]], function(result) {
+						var extGrpObj = result['GRP-'+GRPindex[index]] || 
+							(localStorage['GRP-'+GRPindex[index]] ? JSON.parse(localStorage['GRP-'+GRPindex[index]]) : null);
+						
+						if (!extGrpObj) {
+							groupsProcessed++;
+							if (groupsProcessed === GRPindex.length) {
+								chkEmptyPgItm(fragment2, "grp");
+								writeToPage(fragment2, container);
+							}
+							return;
 						}
-					}
-					else{
-						makeRow(notInstalledObj(extIDinGrp[w]),fragNot,grpId);
-					}
-				}
-				box.appendChild(fragOn);
-				box.appendChild(fragOff);
-				box.appendChild(fragNot);
-			}else{
-				for(var w = 0, q = extIDinGrp.length; w < q; w++){
-					var found = isInstalled(extList, extIDinGrp[w]);
-					if(found[0]){
-						exInfo = found[1];
-						if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
-						searchHit++;
-						makeRow(exInfo,box,grpId);}
-						found = true;
-					}
-					else{
-						makeRow(notInstalledObj(extIDinGrp[w]),box,grpId);
-					}
-				}
+						
+						var fragment = document.createDocumentFragment();
+						var grpId = extGrpObj.name;
+						var extIDinGrp = extGrpObj.items;
+						var searchHit = 0;
+					
+						makeRow(extGrpObj, fragment, grpId);
+						
+						var box = document.createElement("div");
+						box.className = "grpDiv panel";
+						box.id = "panel."+grpId;
+						if(extGrpObj.expand){box.style.display = "block";}
+						else{box.style.display = "none";}
+						
+						if(settings.sortMode=="1"){
+							var fragOn =  fragment.cloneNode();
+							var fragOff =  fragment.cloneNode();
+							var fragNot =  fragment.cloneNode();
+							for(var w = 0, q = extIDinGrp.length; w < q; w++){
+								var found = isInstalled(extList, extIDinGrp[w]);
+								if(found[0]){
+									exInfo = found[1];
+									if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
+									searchHit++;
+									if(exInfo.enabled){makeRow(exInfo,fragOn,grpId);}
+									else{makeRow(exInfo,fragOff,grpId);}
+									}
+								}
+								else{
+									makeRow(notInstalledObj(extIDinGrp[w]),fragNot,grpId);
+								}
+							}
+							box.appendChild(fragOn);
+							box.appendChild(fragOff);
+							box.appendChild(fragNot);
+						}else{
+							for(var w = 0, q = extIDinGrp.length; w < q; w++){
+								var found = isInstalled(extList, extIDinGrp[w]);
+								if(found[0]){
+									exInfo = found[1];
+									if (filterStrings==null || (filterStrings!=null && (exInfo.name).multiFind(filterStrings))){
+									searchHit++;
+									makeRow(exInfo,box,grpId);}
+									found = true;
+								}
+								else{
+									makeRow(notInstalledObj(extIDinGrp[w]),box,grpId);
+								}
+							}
+						}
+						fragment.appendChild(box);
+						if (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings)) || searchHit!=0){
+							packInDiv(fragment, fragment2)
+						}
+						
+						groupsProcessed++;
+						if (groupsProcessed === GRPindex.length) {
+							chkEmptyPgItm(fragment2, "grp");
+							writeToPage(fragment2, container);
+						}
+					});
+				})(i);
 			}
-			fragment.appendChild(box);
-			if (filterStrings==null || (filterStrings!=null && (extGrpObj.name).multiFind(filterStrings)) || searchHit!=0){
-				packInDiv(fragment, fragment2)
-			}
-		}
-		chkEmptyPgItm(fragment2,"grp");
-		writeToPage(fragment2,container);
+		});
 	});
 }
 
@@ -589,30 +686,35 @@ function makeSpRowsFor(rowType) {
 	if(rowType=="latest"){prefix = 'lat';}
 	if(rowType=="lastDisabled"){prefix = 'ld';}
 	var container = document.getElementById(prefix+'ContInner');
-	var exIdList = JSON.parse(localStorage.getItem(rowType));
-	var fragment = document.createDocumentFragment();
-	if(exIdList.length>0){
-		for (var i = 0, t = exIdList.length; i < t; i++) {
-			(function(i) {
-			chrome.management.get(exIdList[i], function(extInfo){
-				if(extInfo!=undefined){
-					if (filterStrings==null || (filterStrings!=null && (extInfo.name).multiFind(filterStrings))){
-						makeRow(extInfo,fragment);
+	
+	// Use chrome.storage.local instead of localStorage
+	chrome.storage.local.get([rowType], function(result) {
+		var exIdList = result[rowType] || (localStorage.getItem(rowType) ? JSON.parse(localStorage.getItem(rowType)) : []);
+		var fragment = document.createDocumentFragment();
+		
+		if(exIdList && exIdList.length > 0){
+			for (var i = 0, t = exIdList.length; i < t; i++) {
+				(function(i) {
+				chrome.management.get(exIdList[i], function(extInfo){
+					if(extInfo!=undefined){
+						if (filterStrings==null || (filterStrings!=null && (extInfo.name).multiFind(filterStrings))){
+							makeRow(extInfo,fragment);
+						}
+						if(i==t-1) {
+							chkEmptyPgItm(fragment,"ext");
+							writeToPage(fragment,container);
+							document.getElementById(prefix+'Cont').style.display = 'block';
+						}
+					}else{
+						weedQ(rowType,exIdList[i]);
+						makeSpRowsFor(rowType);
 					}
-					if(i==t-1) {
-						chkEmptyPgItm(fragment,"ext");
-						writeToPage(fragment,container);
-						document.getElementById(prefix+'Cont').style.display = 'block';
-					}
-				}else{
-					weedQ(rowType,exIdList[i]);
-					makeSpRowsFor(rowType);
-				}
-			});})(i);
+				});})(i);
+			}
+		}else{
+			document.getElementById(prefix+'Cont').style.display = 'none';
 		}
-	}else{
-		document.getElementById(prefix+'Cont').style.display = 'none';
-	}
+	});
 }
 
 function loadExtPage() {
@@ -707,8 +809,12 @@ function switchTab(tabID,remainPos) {
 		}
 		settings.tabPage = tabID;
 	}
-	if(remainPos===undefined) document.getElementById('top').scrollTop = 0;
+	
+	// Save settings to both localStorage and chrome.storage.local
 	localStorage.settings = JSON.stringify(settings);
+	chrome.storage.local.set({settings: settings});
+	
+	if(typeof(remainPos)=="undefined"||!remainPos) document.body.scrollTop = 0;
 }
 
 //get parameter value of an element
@@ -833,25 +939,46 @@ document.onkeydown = function(evt) {
 
 function grpExtNotIn(extId) {
 // console.log("CHK IF IN GRP "+localStorage.length);
-	var grpList = [];
-	var GRPindex = JSON.parse(localStorage.GRPindex);
-	for(var i=0,m=GRPindex.length; i<m; i++) {
-		var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-		var grpName = extGrpObj.name;
-		var grpItems = extGrpObj.items;
-		var inGrp = false;
-		// console.log("- checking "+grpName+", "+i);
-		for (var k = 0, s = grpItems.length; k < s; k++) {
-			if(grpItems[k]==extId){
-			//found in grp;
-				inGrp = true;
-				break;
+	return new Promise((resolve) => {
+		chrome.storage.local.get(['GRPindex'], function(result) {
+			var GRPindex = result.GRPindex || (localStorage.GRPindex ? JSON.parse(localStorage.GRPindex) : []);
+			var grpList = [];
+			var groupsProcessed = 0;
+			
+			if (GRPindex.length === 0) {
+				resolve(grpList);
+				return;
 			}
-		}
-		if(!inGrp) grpList.push(grpName);
-	}
-	// console.log("!! return: "+grpList);
-	return grpList;
+			
+			for(var i=0, m=GRPindex.length; i<m; i++) {
+				(function(index) {
+					chrome.storage.local.get(['GRP-'+GRPindex[index]], function(result) {
+						var extGrpObj = result['GRP-'+GRPindex[index]] || 
+							(localStorage['GRP-'+GRPindex[index]] ? JSON.parse(localStorage['GRP-'+GRPindex[index]]) : null);
+						
+						if (extGrpObj) {
+							var grpName = extGrpObj.name;
+							var grpItems = extGrpObj.items;
+							var inGrp = false;
+							
+							for (var k = 0, s = grpItems.length; k < s; k++) {
+								if(grpItems[k]==extId){
+									inGrp = true;
+									break;
+								}
+							}
+							if(!inGrp) grpList.push(grpName);
+						}
+						
+						groupsProcessed++;
+						if (groupsProcessed === GRPindex.length) {
+							resolve(grpList);
+						}
+					});
+				})(i);
+			}
+		});
+	});
 }
 
 var link = document.createElement("a");
@@ -987,49 +1114,69 @@ function rMenu2(evt,mode,rH,extId,currGrp){
 	popHeight = getPara(document.getElementsByTagName('body')[0],"height");
 	popWidth = getPara(document.getElementsByTagName('body')[0],"width");
 	//var GRPindex = JSON.parse(localStorage.GRPindex);
-	var GRPindex = grpExtNotIn(extId);
-	var menu = document.getElementById('menu2');
+	menu = document.getElementById('menu2');
 	var evtSrc = evt.target.id; var mvUp = 6;
 	var rect = document.getElementById('menu').getBoundingClientRect();
 	var posX = rect.left; var posY = rect.bottom-34;
-	var approxHeight = ((GRPindex.length+1) * rH)+12+rH+10;
-	if(approxHeight>popHeight) {approxHeight=popHeight-10; mvUp+=4;}
 
 	menu.addEventListener('mouseleave',function(){menu.style.display='none';});
-
 	menu.innerHTML = "";
+	
+	// Show loading menu
 	var title = link.cloneNode(false);
 	title.className = "rHeadItem";
-	if(mode=="add") title.innerHTML = chrome.i18n.getMessage("popup_rClick_add");
-	else {title.innerHTML = chrome.i18n.getMessage("popup_rClick_mov"); }
+	if(mode=="add") title.innerHTML = chrome.i18n.getMessage("popup_rClick_add") + " (Loading...)";
+	else {title.innerHTML = chrome.i18n.getMessage("popup_rClick_mov") + " (Loading...)"; }
 	menu.appendChild(title);
-	menu.appendChild(hr.cloneNode(false));
 	
-	var elementNG = link.cloneNode(false);
-	if(mode=="add") elementNG.addEventListener("click", function (){newGrpOvl(2,extId);});
-	if(mode=="mov") elementNG.addEventListener("click", function (){
-		var cgrpObj = JSON.parse(localStorage["GRP-"+currGrp]);
-		var cgrpItems = cgrpObj.items;
-		cgrpItems.splice(cgrpItems.indexOf(extId),1);
-		localStorage["GRP-"+currGrp] = JSON.stringify(cgrpObj);
-		newGrpOvl(2,extId);
-	});
-	elementNG.innerHTML = chrome.i18n.getMessage("popup_rClick_ng");
-	menu.appendChild(elementNG);
-	
-	for (var i = 0, j = GRPindex.length; i < j; i++) {
-			var extGrpObj = JSON.parse(localStorage["GRP-"+GRPindex[i]]);
-			var grpName = extGrpObj.name;
-			var elementS = link.cloneNode(false);
-			(function (_grpName) {
-				elementS.addEventListener("click", function (){grpOps(mode, extId, _grpName, currGrp);});
-			})(grpName);
-			elementS.innerHTML = grpName;
-			menu.appendChild(elementS);
-	}
-	if((popHeight-(rect.bottom-rH-4))<approxHeight) posY = popHeight - approxHeight - mvUp;
-	if(approxHeight>popHeight) posY-=4;
 	rMenuShow(menu,posX,posY,(rect.right - rect.left - 6));
+	
+	// Get groups the extension is not in
+	grpExtNotIn(extId).then(function(GRPindex) {
+		var approxHeight = ((GRPindex.length+1) * rH)+12+rH+10;
+		if(approxHeight>popHeight) {approxHeight=popHeight-10; mvUp+=4;}
+		
+		menu.innerHTML = "";
+		var title = link.cloneNode(false);
+		title.className = "rHeadItem";
+		if(mode=="add") title.innerHTML = chrome.i18n.getMessage("popup_rClick_add");
+		else {title.innerHTML = chrome.i18n.getMessage("popup_rClick_mov"); }
+		menu.appendChild(title);
+		menu.appendChild(hr.cloneNode(false));
+		
+		var elementNG = link.cloneNode(false);
+		if(mode=="add") elementNG.addEventListener("click", function (){newGrpOvl(2,extId);});
+		if(mode=="mov") elementNG.addEventListener("click", function (){
+			chrome.storage.local.get(['GRP-'+currGrp], function(result) {
+				var cgrpObj = result['GRP-'+currGrp] || (localStorage['GRP-'+currGrp] ? JSON.parse(localStorage['GRP-'+currGrp]) : null);
+				if (!cgrpObj) return;
+				
+				var cgrpItems = cgrpObj.items;
+				cgrpItems.splice(cgrpItems.indexOf(extId),1);
+				
+				// Save to both localStorage and chrome.storage.local
+				localStorage['GRP-'+currGrp] = JSON.stringify(cgrpObj);
+				chrome.storage.local.set({['GRP-'+currGrp]: cgrpObj}, function() {
+					newGrpOvl(2,extId);
+				});
+			});
+		});
+		elementNG.innerHTML = chrome.i18n.getMessage("popup_rClick_ng");
+		menu.appendChild(elementNG);
+		
+		for (var i = 0, j = GRPindex.length; i < j; i++) {
+			(function(grpName) {
+				var elementS = link.cloneNode(false);
+				elementS.addEventListener("click", function (){grpOps(mode, extId, grpName, currGrp);});
+				elementS.innerHTML = grpName;
+				menu.appendChild(elementS);
+			})(GRPindex[i]);
+		}
+		
+		if((popHeight-(rect.bottom-rH-4))<approxHeight) posY = popHeight - approxHeight - mvUp;
+		if(approxHeight>popHeight) posY-=4;
+		rMenuShow(menu,posX,posY,(rect.right - rect.left - 6));
+	});
 }
 
 function rMenuShow(menu,posX,posY,wAdj){
@@ -1045,29 +1192,57 @@ function rMenuHide() {
 	if (document.getElementById('menu').style.display == "block") {document.getElementById('menu').style.display='none';document.getElementById('menu2').style.display='none';}
 };
 
-function grpOps(mode,extId,grpId,currGrpId){
-	var grpObj = JSON.parse(localStorage["GRP-"+grpId]);
-	var grpItems = grpObj.items;
-	if(mode=="add"){
-		if(grpItems.indexOf(extId)==-1) grpItems.push(extId);
-		if(settings.showGrp) location.reload(true);
-	}
-	else if(mode=="mov"){
-		var cgrpObj = JSON.parse(localStorage["GRP-"+currGrpId]);
-		var cgrpItems = cgrpObj.items;
-		cgrpItems.splice(cgrpItems.indexOf(extId),1);
-		localStorage["GRP-"+currGrpId] = JSON.stringify(cgrpObj);
-		
-		if(grpItems.indexOf(extId)==-1) grpItems.push(extId);
-	}
-	else if(mode=="rem"){
-		grpItems.splice(grpItems.indexOf(extId),1);
-	}
-	sortGrpItems(grpItems,function(sortedItems){
-		grpObj.items = sortedItems;
-		localStorage["GRP-"+grpId] = JSON.stringify(grpObj);
-		loadGrpPage();
-	});
+function grpOps(mode, extId, grpId, currGrpId){
+    chrome.storage.local.get(['GRP-'+grpId], function(result) {
+        var grpObj = result['GRP-'+grpId] || (localStorage['GRP-'+grpId] ? JSON.parse(localStorage['GRP-'+grpId]) : null);
+        if (!grpObj) return;
+        
+        var grpItems = grpObj.items;
+        
+        if(mode=="add"){
+            if(grpItems.indexOf(extId)==-1) grpItems.push(extId);
+            if(settings.showGrp) location.reload(true);
+        }
+        else if(mode=="mov"){
+            chrome.storage.local.get(['GRP-'+currGrpId], function(result) {
+                var cgrpObj = result['GRP-'+currGrpId] || (localStorage['GRP-'+currGrpId] ? JSON.parse(localStorage['GRP-'+currGrpId]) : null);
+                if (!cgrpObj) return;
+                
+                var cgrpItems = cgrpObj.items;
+                cgrpItems.splice(cgrpItems.indexOf(extId),1);
+                
+                // Save to both localStorage and chrome.storage.local
+                localStorage['GRP-'+currGrpId] = JSON.stringify(cgrpObj);
+                chrome.storage.local.set({['GRP-'+currGrpId]: cgrpObj}, function() {
+                    if(grpItems.indexOf(extId)==-1) grpItems.push(extId);
+                    
+                    sortGrpItems(grpItems, function(sortedItems){
+                        grpObj.items = sortedItems;
+                        
+                        // Save to both localStorage and chrome.storage.local
+                        localStorage['GRP-'+grpId] = JSON.stringify(grpObj);
+                        chrome.storage.local.set({['GRP-'+grpId]: grpObj}, function() {
+                            loadGrpPage();
+                        });
+                    });
+                });
+            });
+            return; // Return early since we're handling the save in the callback
+        }
+        else if(mode=="rem"){
+            grpItems.splice(grpItems.indexOf(extId),1);
+        }
+        
+        sortGrpItems(grpItems, function(sortedItems){
+            grpObj.items = sortedItems;
+            
+            // Save to both localStorage and chrome.storage.local
+            localStorage['GRP-'+grpId] = JSON.stringify(grpObj);
+            chrome.storage.local.set({['GRP-'+grpId]: grpObj}, function() {
+                loadGrpPage();
+            });
+        });
+    });
 }
 
 chrome.management.onDisabled.addListener(function(extInfo){
@@ -1086,6 +1261,12 @@ function swapSibling(node1, node2) {
 
 //start here
 document.addEventListener('DOMContentLoaded', function () {
+	// The initialization logic is now moved to the initializeUI function
+	// which is called after the settings are loaded from chrome.storage.local
+});
+
+// Function to initialize the UI after settings are loaded
+function initializeUI() {
 	if(settings.tabTop) swapSibling(document.getElementById('top'), document.getElementById('bottom'));
 	if(settings.searchTop) swapSibling(document.getElementById('top'), document.getElementById('bar'));
 
@@ -1172,4 +1353,4 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('top').onmousewheel = function(e){if(e.wheelDelta!=0)rMenuHide();};
 	document.getElementById('menu2').onmousewheel = function(e){e.stopPropagation();};
 	
-});
+}

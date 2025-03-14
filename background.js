@@ -26,7 +26,7 @@ function storeUrl(extID,giveG) {
 }
 
 var defaultSettings = {
-  "grpExt" : true,
+  "grpExt" : false,
   "sortMode" : "1",
   "showChk" : true,
   "showSet" : true,
@@ -40,17 +40,17 @@ var defaultSettings = {
   "showCount" : true,
   "showSearch" : true,
   "showDis" : true,
-  "showStore" : true,
+  "showStore" : false,
   "launchApp" : false,
-  "showP" : false,
+  "showP" : true,
   "importMode" : "1",
-  "searchSave" : false,
+  "searchSave" : true,
   "advGrpVw" : true,
   "rightClickDel" : true,
   "showLat" : false,
-  "searchTop" : false,
+  "searchTop" : true,
   "showLD" : false,
-  "tabTop" : false,
+  "tabTop" : true,
   "onlyOne" : false,
   "showGrp" : false,
   "theme" : "1"
@@ -668,6 +668,13 @@ function contextHandler(info, tab) {
   const grpName = info.menuItemId;
   enableGrp(grpName, false, false, true);
 }
+
+// Set up the extension when installed
+chrome.runtime.onInstalled.addListener(async function(details) {
+  if (details.reason === "install") {
+    await initialize();
+  }
+});
 
 // Service worker event listeners
 settingsUpdate().then(() => {

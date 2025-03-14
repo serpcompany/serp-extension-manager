@@ -227,157 +227,184 @@ function noContextHandler() {
 }
 
 function save() {
-	settings = JSON.parse(localStorage.settings);
+	// Get settings from storage
+	chrome.storage.local.get(['settings'], function(result) {
+		let settings = result.settings || JSON.parse(localStorage.settings || '{}');
 
-	settings.grpExt = document.getElementById('grpExt').checked;
-	settings.showChk = document.getElementById('showChk').checked;
-	settings.showGrp = document.getElementById('showGrp').checked;
-	settings.showSet = document.getElementById('showSet').checked;
-	settings.showDel = document.getElementById('showDel').checked;
-	settings.showApp = document.getElementById('showApp').checked;
-	settings.showThm = document.getElementById('showThm').checked;
-	settings.showLat = document.getElementById('showLat').checked;
-	settings.showLD = document.getElementById('showLD').checked;
-	settings.showCount = document.getElementById('showCount').checked;
-	settings.showSearch = document.getElementById('showSearch').checked;
-	settings.showDis = document.getElementById('showDis').checked;
-	settings.showTab = document.getElementById('showTab').checked;
-	settings.showStore = document.getElementById('showStore').checked;
-	settings.showP = document.getElementById('showP').checked;
-	settings.altBut = document.getElementById('altBut').checked;
-	settings.launchApp = document.getElementById('launchApp').checked;
-	settings.searchSave = document.getElementById('searchSave').checked;
-	settings.rightClickDel = document.getElementById('rightClickDel').checked;
-	settings.advGrpVw = document.getElementById('advGrpVw').checked;
-	settings.noContext = document.getElementById('noContext').checked;
-	settings.searchTop = document.getElementById('searchTop').checked;
-	settings.tabTop = document.getElementById('tabTop').checked;
-	settings.onlyOne = document.getElementById('onlyOne').checked;
-	
-	settings.sortMode = getRadioValue('sort');
-	settings.theme = getRadioValue('theme');
-	settings.importMode = getRadioValue('import');
+		settings.grpExt = document.getElementById('grpExt').checked;
+		settings.showChk = document.getElementById('showChk').checked;
+		settings.showGrp = document.getElementById('showGrp').checked;
+		settings.showSet = document.getElementById('showSet').checked;
+		settings.showDel = document.getElementById('showDel').checked;
+		settings.showApp = document.getElementById('showApp').checked;
+		settings.showThm = document.getElementById('showThm').checked;
+		settings.showLat = document.getElementById('showLat').checked;
+		settings.showLD = document.getElementById('showLD').checked;
+		settings.showCount = document.getElementById('showCount').checked;
+		settings.showSearch = document.getElementById('showSearch').checked;
+		settings.showDis = document.getElementById('showDis').checked;
+		settings.showTab = document.getElementById('showTab').checked;
+		settings.showStore = document.getElementById('showStore').checked;
+		settings.showP = document.getElementById('showP').checked;
+		settings.altBut = document.getElementById('altBut').checked;
+		settings.launchApp = document.getElementById('launchApp').checked;
+		settings.searchSave = document.getElementById('searchSave').checked;
+		settings.rightClickDel = document.getElementById('rightClickDel').checked;
+		settings.advGrpVw = document.getElementById('advGrpVw').checked;
+		settings.noContext = document.getElementById('noContext').checked;
+		settings.searchTop = document.getElementById('searchTop').checked;
+		settings.tabTop = document.getElementById('tabTop').checked;
+		settings.onlyOne = document.getElementById('onlyOne').checked;
+		
+		settings.sortMode = getRadioValue('sort');
+		settings.theme = getRadioValue('theme');
+		settings.importMode = getRadioValue('import');
 
-	localStorage.settings = JSON.stringify(settings);
-	updateIcon();
+		// Save to both localStorage and chrome.storage.local for backward compatibility
+		localStorage.settings = JSON.stringify(settings);
+		chrome.storage.local.set({'settings': settings}, function() {
+			// Call updateIcon after settings are saved
+			updateIcon();
+		});
+	});
 }
 
 // Make sure the options gets properly initialized from the
 // saved preference.
 document.addEventListener('DOMContentLoaded', function () {
-	settings = JSON.parse(localStorage.settings);
+	// Load settings from chrome.storage.local with fallback to localStorage
+	chrome.storage.local.get(['settings'], function(result) {
+		let settings = result.settings;
+		
+		// Fallback to localStorage if chrome.storage.local is empty
+		if (!settings && localStorage.settings) {
+			settings = JSON.parse(localStorage.settings);
+			// Migrate settings to chrome.storage.local
+			chrome.storage.local.set({'settings': settings});
+		}
+		
+		document.getElementById('grpExt').checked = settings.grpExt;
+		document.getElementById('grpExt').addEventListener('click', save);
 
-	document.getElementById('grpExt').checked = settings.grpExt;
-	document.getElementById('grpExt').addEventListener('click', save);
+		document.getElementById('showChk').checked = settings.showChk;
+		document.getElementById('showChk').addEventListener('click', save);
+		
+		document.getElementById('showGrp').checked = settings.showGrp;
+		document.getElementById('showGrp').addEventListener('click', save);
 
-	document.getElementById('showChk').checked = settings.showChk;
-	document.getElementById('showChk').addEventListener('click', save);
-	
-	document.getElementById('showGrp').checked = settings.showGrp;
-	document.getElementById('showGrp').addEventListener('click', save);
+		document.getElementById('showSet').checked = settings.showSet;
+		document.getElementById('showSet').addEventListener('click', save);
 
-	document.getElementById('showSet').checked = settings.showSet;
-	document.getElementById('showSet').addEventListener('click', save);
+		document.getElementById('showDel').checked = settings.showDel;
+		document.getElementById('showDel').addEventListener('click', save);
 
-	document.getElementById('showDel').checked = settings.showDel;
-	document.getElementById('showDel').addEventListener('click', save);
+		document.getElementById('showApp').checked = settings.showApp;
+		document.getElementById('showApp').addEventListener('click', save);
 
-	document.getElementById('showApp').checked = settings.showApp;
-	document.getElementById('showApp').addEventListener('click', save);
+		document.getElementById('showThm').checked = settings.showThm;
+		document.getElementById('showThm').addEventListener('click', save);
+		
+		document.getElementById('showLat').checked = settings.showLat;
+		document.getElementById('showLat').addEventListener('click', save);
+		
+		document.getElementById('showLD').checked = settings.showLD;
+		document.getElementById('showLD').addEventListener('click', save);
+		
+		document.getElementById('showCount').checked = settings.showCount;
+		document.getElementById('showCount').addEventListener('click', save);
+		
+		document.getElementById('showSearch').checked = settings.showSearch;
+		document.getElementById('showSearch').addEventListener('click', save);
+		document.getElementById('searchTop').checked = settings.searchTop;
+		document.getElementById('searchTop').addEventListener('click', save);
+		
+		document.getElementById('showDis').checked = settings.showDis;
+		document.getElementById('showDis').addEventListener('click', save);
+		
+		document.getElementById('showTab').checked = settings.showTab;
+		document.getElementById('showTab').addEventListener('click', save);
+		document.getElementById('tabTop').checked = settings.tabTop;
+		document.getElementById('tabTop').addEventListener('click', save);
+		
+		document.getElementById('showStore').checked = settings.showStore;
+		document.getElementById('showStore').addEventListener('click', save);
+		
+		document.getElementById('showP').checked = settings.showP;
+		document.getElementById('showP').addEventListener('click', save);
+		
+		document.getElementById('altBut').checked = settings.altBut;
+		document.getElementById('altBut').addEventListener('click', save);
+		
+		document.getElementById('launchApp').checked = settings.launchApp;
+		document.getElementById('launchApp').addEventListener('click', save);
+		document.getElementById('searchSave').checked = settings.searchSave;
+		document.getElementById('searchSave').addEventListener('click', save);
+		document.getElementById('rightClickDel').checked = settings.rightClickDel;
+		document.getElementById('rightClickDel').addEventListener('click', save);
+		document.getElementById('advGrpVw').checked = settings.advGrpVw;
+		document.getElementById('advGrpVw').addEventListener('click', save);
+		
+		document.getElementById('noContext').checked = settings.noContext;
+		document.getElementById('noContext').addEventListener('click', noContextHandler);
+		document.getElementById('onlyOne').checked = settings.onlyOne;
+		document.getElementById('onlyOne').addEventListener('click', save);
+		
+		document.getElementById('sort'+settings.sortMode).checked = true;
+		document.getElementById('sort1').addEventListener('click', save);
+		document.getElementById('sort2').addEventListener('click', save);
+		
+		// Make sure the theme elements exist before setting checked
+		var themeElement = document.getElementById('theme'+settings.theme);
+		if (themeElement) {
+			themeElement.checked = true;
+		}
+		
+		document.getElementById('theme1').addEventListener('click', function(){save();location.reload();});
+		document.getElementById('theme2').addEventListener('click', function(){save();location.reload();});
+		document.getElementById('theme3').addEventListener('click', function(){save();location.reload();});
+		
+		document.getElementById('newGrpButton').addEventListener('click', function(e){
+			e.preventDefault();
+			showOverlay("new","");
+		});
+		document.getElementById('bakImpButton').addEventListener('click', function(e){
+			e.preventDefault();
+			showOverlay("bak","");
+		});
+		document.getElementById('closeOver').addEventListener('click', closeOverlay);
+		document.getElementById('closeOver2').addEventListener('click', function(e) {closeOverlay(); document.getElementById('drop_zone').innerHTML = chrome.i18n.getMessage("opt_bigp_dropz");});
+		document.getElementById('savGrpButton').addEventListener('click', function(){saveExtGrp(1,true);});
+		document.getElementById('savNGrpButton').addEventListener('click', function(){saveExtGrp(2,true);});
+		
+		document.getElementById('backupButton').addEventListener('click', downloadFile);
+		document.getElementById('import'+settings.importMode).checked = true;
+		document.getElementById('import1').addEventListener('click', save);
+		document.getElementById('import2').addEventListener('click', save);
+		document.getElementById('drop_zone').addEventListener('click', function() {triggerClick(document.getElementById('files'));}, false);
+		document.getElementById('drop_zone').addEventListener('dragover', handleDragOver, false);
+		document.getElementById('drop_zone').addEventListener('drop', handleDropSelect, false);
+		document.getElementById('files').addEventListener('change', handleFileSelect, false);
+		
+		document.getElementById('grpDetail').addEventListener('click', function(){popupwindow("details.html","Blank",300,600);});
 
-	document.getElementById('showThm').checked = settings.showThm;
-	document.getElementById('showThm').addEventListener('click', save);
-	
-	document.getElementById('showLat').checked = settings.showLat;
-	document.getElementById('showLat').addEventListener('click', save);
-	
-	document.getElementById('showLD').checked = settings.showLD;
-	document.getElementById('showLD').addEventListener('click', save);
-	
-	document.getElementById('showCount').checked = settings.showCount;
-	document.getElementById('showCount').addEventListener('click', save);
-	
-	document.getElementById('showSearch').checked = settings.showSearch;
-	document.getElementById('showSearch').addEventListener('click', save);
-	document.getElementById('searchTop').checked = settings.searchTop;
-	document.getElementById('searchTop').addEventListener('click', save);
-	
-	document.getElementById('showDis').checked = settings.showDis;
-	document.getElementById('showDis').addEventListener('click', save);
-	
-	document.getElementById('showTab').checked = settings.showTab;
-	document.getElementById('showTab').addEventListener('click', save);
-	document.getElementById('tabTop').checked = settings.tabTop;
-	document.getElementById('tabTop').addEventListener('click', save);
-	
-	document.getElementById('showStore').checked = settings.showStore;
-	document.getElementById('showStore').addEventListener('click', save);
-	
-	document.getElementById('showP').checked = settings.showP;
-	document.getElementById('showP').addEventListener('click', save);
-	
-	document.getElementById('altBut').checked = settings.altBut;
-	document.getElementById('altBut').addEventListener('click', save);
-	
-	document.getElementById('launchApp').checked = settings.launchApp;
-	document.getElementById('launchApp').addEventListener('click', save);
-	document.getElementById('searchSave').checked = settings.searchSave;
-	document.getElementById('searchSave').addEventListener('click', save);
-	document.getElementById('rightClickDel').checked = settings.rightClickDel;
-	document.getElementById('rightClickDel').addEventListener('click', save);
-	document.getElementById('advGrpVw').checked = settings.advGrpVw;
-	document.getElementById('advGrpVw').addEventListener('click', save);
-	
-	document.getElementById('noContext').checked = settings.noContext;
-	document.getElementById('noContext').addEventListener('click', noContextHandler);
-	document.getElementById('onlyOne').checked = settings.onlyOne;
-	document.getElementById('onlyOne').addEventListener('click', save);
-	
-	document.getElementById('sort'+settings.sortMode).checked = true;
-	document.getElementById('sort1').addEventListener('click', save);
-	document.getElementById('sort2').addEventListener('click', save);
-	
-	// Make sure the theme elements exist before setting checked
-	var themeElement = document.getElementById('theme'+settings.theme);
-	if (themeElement) {
-		themeElement.checked = true;
-	}
-	
-	document.getElementById('theme1').addEventListener('click', function(){save();location.reload();});
-	document.getElementById('theme2').addEventListener('click', function(){save();location.reload();});
-	document.getElementById('theme3').addEventListener('click', function(){save();location.reload();});
-	
-	document.getElementById('newGrpButton').addEventListener('click', function(e){
-		e.preventDefault();
-		showOverlay("new","");
+		document.getElementById('resetButton').addEventListener('click', clearMemory);
+		
+		// Add event listener for the save button
+		document.getElementById('saveButton').addEventListener('click', function() {
+			save();
+			// Provide feedback to the user
+			this.textContent = chrome.i18n.getMessage("opt_savedbtn") || "Saved!";
+			setTimeout(() => {
+				this.textContent = chrome.i18n.getMessage("opt_savebtn") || "Save Settings";
+			}, 2000);
+		});
+		
+		window.addEventListener('resize', resizeExtGrpListChk, true);
+		
+		forOpera();
+		
+		loadExtGrpList();
 	});
-	document.getElementById('bakImpButton').addEventListener('click', function(e){
-		e.preventDefault();
-		showOverlay("bak","");
-	});
-	document.getElementById('closeOver').addEventListener('click', closeOverlay);
-	document.getElementById('closeOver2').addEventListener('click', function(e) {closeOverlay(); document.getElementById('drop_zone').innerHTML = chrome.i18n.getMessage("opt_bigp_dropz");});
-	document.getElementById('savGrpButton').addEventListener('click', function(){saveExtGrp(1,true);});
-	document.getElementById('savNGrpButton').addEventListener('click', function(){saveExtGrp(2,true);});
-	
-	document.getElementById('backupButton').addEventListener('click', downloadFile);
-	document.getElementById('import'+settings.importMode).checked = true;
-	document.getElementById('import1').addEventListener('click', save);
-	document.getElementById('import2').addEventListener('click', save);
-	document.getElementById('drop_zone').addEventListener('click', function() {triggerClick(document.getElementById('files'));}, false);
-	document.getElementById('drop_zone').addEventListener('dragover', handleDragOver, false);
-	document.getElementById('drop_zone').addEventListener('drop', handleDropSelect, false);
-	document.getElementById('files').addEventListener('change', handleFileSelect, false);
-	
-	document.getElementById('grpDetail').addEventListener('click', function(){popupwindow("details.html","Blank",300,600);});
-
-	document.getElementById('resetButton').addEventListener('click', clearMemory);
-	
-	window.addEventListener('resize', resizeExtGrpListChk, true);
-	
-	forOpera();
-	
-	loadExtGrpList();
 });
 
 // no Opera apps so disable

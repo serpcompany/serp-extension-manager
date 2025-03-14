@@ -233,6 +233,12 @@
    "opt_resetbtn_popupMsg": {
       "message": "Reset settings?\nExtension groups will be removed as well!"
    },
+   "opt_savebtn": {
+      "message": "Save Settings"
+   },
+   "opt_savedbtn": {
+      "message": "Saved!"
+   },
    "other_text1": {
       "message": "Do drop by my DeviantArt page to see more of my works!"
    },
