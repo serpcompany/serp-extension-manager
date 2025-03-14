@@ -8,7 +8,8 @@
          "38": "icon-38-0.png"
       },
       "default_popup": "popup.html",
-      "default_title": "__MSG_manifest_toolbarbtn_tooltip__"
+      "default_title": "__MSG_manifest_toolbarbtn_tooltip__",
+      "default_height": 800
    },
    "default_locale": "en",
    "description": "__MSG_manifest_description__",

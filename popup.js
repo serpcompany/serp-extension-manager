@@ -1287,18 +1287,25 @@ function initializeUI() {
 		if(itmCount==0) body.className="oneItem";
 	}
 	
-	//popup height
+	// Ensure popup has maximum available height
+	document.body.style.height = "800px";
+	document.body.style.maxHeight = "800px";
+	document.getElementById('top').style.maxHeight = "750px";
+	document.getElementById('top').style.overflowY = "auto";
+	
+	// Original popup height calculation code below, keeping for reference but not actively using
 	var zoomLvl = window.devicePixelRatio;
 	var query = "(-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi)";
 	if (matchMedia(query).matches) {
 		zoomLvl = zoomLvl/2;
 	}
-	var allowedH = 600; //max popup height is 600px as set by Google
-	if(settings.showSearch||settings.showDis) allowedH -= 28;
-	if(settings.showStore) allowedH -= 23;
-	if(settings.showTab) allowedH -= 34;
-	if(zoomLvl!=1) allowedH-=(allowedH*(zoomLvl-1));
-	document.getElementById('top').style.maxHeight = allowedH+"px";
+	// Comment out the original height calculation
+	// var allowedH = 600; //max popup height is 600px as set by Google
+	// if(settings.showSearch||settings.showDis) allowedH -= 28;
+	// if(settings.showStore) allowedH -= 23;
+	// if(settings.showTab) allowedH -= 34;
+	// if(zoomLvl!=1) allowedH-=(allowedH*(zoomLvl-1));
+	// document.getElementById('top').style.maxHeight = allowedH+"px";
 	
 	//search bar area
 	var searchBar = document.getElementById('searchQ');

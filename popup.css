@@ -1,9 +1,11 @@
 body {
 width:314px;
+height: 800px;
+	max-height: 800px;
 -webkit-user-select:none;
 margin:0;
 padding:0;
-overflow:hidden;
+overflow-y: auto;
 font:12px __MSG_ext_font__;
 }
 
@@ -218,9 +220,10 @@ padding:2px 0 2px;
 }
 
 #top {
-min-height:210px;
-max-height:515px;
 overflow-y:auto;
+max-height: 750px;
+	width: 100%;
+	padding-bottom: 4px;
 margin:0;
 padding:0;
 }
